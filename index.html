@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio pribadi - Fullstack Developer spesialis Laravel, Flutter, PHP, dan PostgreSQL." />
+  <title>Mirhan Maulana — Fullstack Developer</title>
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     LOADER
+════════════════════════════════════════ -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo"><span>&lt;</span>MirhanM <span>/&gt;</span></div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#hero">
+      <span>&lt;</span>MirhanM<span class="accent">/&gt;</span>
+    </a>
+
+    <div class="d-flex align-items-center gap-3 order-lg-3">
+      <!-- Dark Mode Toggle -->
+      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
+        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
+      </div>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+  </div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Available for hire
+        </div>
+        <h1 class="hero-name">
+          <span class="first">Mirhan</span><br>
+          <span class="last">Maulana.</span>
+        </h1>
+        <p class="hero-role">
+          &gt;&nbsp;<span id="typedText"></span><span class="typed-cursor">_</span>
+        </p>
+        <p class="hero-desc">
+          Membangun aplikasi web dan mobile yang scalable, clean, dan performa tinggi. Spesialis Laravel, Flutter, dan ekosistem PHP modern.
+        </p>
+        <div class="hero-cta d-flex flex-wrap gap-3">
+          <a href="#contact" class="btn-primary-custom">
+            <i class="fa-solid fa-paper-plane"></i> Hire Me
+          </a>
+          <a href="assets/CV_MIRHAN_MAULANA.pdf" download class="btn-outline-custom">
+            <i class="fa-solid fa-download"></i> Download CV
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num" data-target="3" data-suffix="+">0+</span>
+            <span class="stat-label">Years Exp</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="25" data-suffix="+">0+</span>
+            <span class="stat-label">Projects Done</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="12" data-suffix="+">0+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="7" data-suffix="">0</span>
+            <span class="stat-label">Tech Stack</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 hero-visual">
+        <!-- Code window preview -->
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dot red"></div>
+            <div class="code-dot yellow"></div>
+            <div class="code-dot green"></div>
+            <div class="code-title"><i class="fa-brands fa-laravel me-1" style="color:#f05340;"></i> DeveloperProfile.php</div>
+          </div>
+          <div class="code-body">
+            <div class="code-line"><span class="ln">1</span><span class="kw">class </span><span class="fn">DeveloperProfile</span><span class="punc"> {</span></div>
+            <div class="code-line"><span class="ln">2</span></div>
+            <div class="code-line"><span class="ln">3</span>&nbsp;&nbsp;<span class="kw">public </span><span class="prop">$name</span><span class="punc"> = </span><span class="str">'Mirhan Maulana'</span><span class="punc">;</span></div>
+            <div class="code-line"><span class="ln">4</span>&nbsp;&nbsp;<span class="kw">public </span><span class="prop">$role</span><span class="punc"> = </span><span class="str">'Fullstack Dev'</span><span class="punc">;</span></div>
+            <div class="code-line"><span class="ln">5</span>&nbsp;&nbsp;<span class="kw">public </span><span class="prop">$stack</span><span class="punc"> = [</span></div>
+            <div class="code-line"><span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Laravel'</span><span class="punc">,</span> <span class="str">'Flutter'</span><span class="punc">,</span></div>
+            <div class="code-line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'PHP'</span><span class="punc">,</span> <span class="str">'PostgreSQL'</span><span class="punc">,</span></div>
+            <div class="code-line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Docker'</span><span class="punc">,</span> <span class="str">'MySQL'</span><span class="punc">,</span></div>
+            <div class="code-line"><span class="ln">9</span>&nbsp;&nbsp;<span class="punc">];</span></div>
+            <div class="code-line"><span class="ln">10</span></div>
+            <div class="code-line"><span class="ln">11</span>&nbsp;&nbsp;<span class="kw">public function </span><span class="fn">hire</span><span class="punc">(): </span><span class="fn">Response</span></div>
+            <div class="code-line"><span class="ln">12</span>&nbsp;&nbsp;<span class="punc">{</span></div>
+            <div class="code-line"><span class="ln">13</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">// Let's build something great!</span></div>
+            <div class="code-line"><span class="ln">14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return </span><span class="fn">response</span><span class="punc">(</span><span class="str">'Ready 🚀'</span><span class="punc">);</span><span class="code-cursor"></span></div>
+            <div class="code-line"><span class="ln">15</span>&nbsp;&nbsp;<span class="punc">}</span></div>
+            <div class="code-line"><span class="ln">16</span><span class="punc">}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 text-center text-lg-start reveal">
+        <div class="about-image-wrap d-inline-block">
+          <div class="about-img-placeholder">
+            <i class="fa-solid fa-user-tie"></i>
+            <span style="color:var(--text-muted);font-size:0.8rem;font-family:var(--font-mono)">photo.jpg</span>
+          </div>
+          <div class="about-frame"></div>
+          <div class="about-badge-float">
+            <span class="badge-float-num">3+</span>
+            <span class="badge-float-label">Years Experience</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 about-text reveal" data-delay="150">
+        <span class="section-label">// about me</span>
+        <h2 class="section-title">Passionate Developer,<br><span style="color:var(--accent-bright)">Problem Solver.</span></h2>
+        <p class="mb-4" style="color:var(--text-secondary);line-height:1.8;">
+          Halo! Saya <strong style="color:var(--text-primary)">Mirhan Maulana</strong>, seorang Fullstack Developer yang berfokus pada pengembangan aplikasi web dan mobile. Dengan pengalaman lebih dari 3 tahun, saya telah membantu berbagai klien dan perusahaan mewujudkan ide digital mereka menjadi produk nyata yang fungsional dan estetis.
+        </p>
+        <p class="mb-4" style="color:var(--text-secondary);line-height:1.8;">
+          Spesialisasi saya adalah ekosistem Laravel untuk backend, Flutter untuk aplikasi mobile lintas platform, dan PostgreSQL/MySQL sebagai basis data. Saya percaya bahwa kode yang baik adalah kode yang mudah dibaca, dipelihara, dan diskalakan.
+        </p>
+        <div class="mb-4">
+          <span class="about-tag"><i class="fa-solid fa-graduation-cap me-1"></i>D3 Manajemen Informatika, A.Md.Kom</span>
+          <span class="about-tag"><i class="fa-solid fa-map-marker-alt me-1"></i>Jakarta, Indonesia</span>
+          <span class="about-tag"><i class="fa-solid fa-language me-1"></i>ID / EN</span>
+          <span class="about-tag"><i class="fa-solid fa-briefcase me-1"></i>Freelance Available</span>
+          <span class="about-tag"><i class="fa-solid fa-code me-1"></i>Clean Code Advocate</span>
+        </div>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="#contact" class="btn-primary-custom">
+            <i class="fa-solid fa-envelope"></i> Let's Talk
+          </a>
+          <a href="#portfolio" class="btn-outline-custom">
+            <i class="fa-solid fa-folder-open"></i> My Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// tech stack</span>
+      <h2 class="section-title">Skills &amp; Technologies</h2>
+      <p class="section-subtitle mx-auto">Teknologi yang saya kuasai untuk membangun produk digital berkualitas tinggi.</p>
+    </div>
+    <div class="row g-4">
+
+      <!-- Laravel -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="0">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-brands fa-laravel" style="color:#f05340;"></i>
+          </div>
+          <div class="skill-name">Laravel</div>
+          <div class="skill-desc">MVC, Eloquent ORM, REST API, Middleware, Queue</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="90"></div></div>
+          <span class="skill-level">Expert · 90%</span>
+        </div>
+      </div>
+
+      <!-- Flutter -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="80">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-solid fa-mobile-screen-button" style="color:#54c5f8;"></i>
+          </div>
+          <div class="skill-name">Flutter</div>
+          <div class="skill-desc">Cross-platform, BLoC, Provider, Dio, GetX</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="80"></div></div>
+          <span class="skill-level">Advanced · 80%</span>
+        </div>
+      </div>
+
+      <!-- PHP -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="160">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-brands fa-php" style="color:#8892be;"></i>
+          </div>
+          <div class="skill-name">PHP</div>
+          <div class="skill-desc">PHP 8.x, OOP, Composer, PSR Standards</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="92"></div></div>
+          <span class="skill-level">Expert · 92%</span>
+        </div>
+      </div>
+
+      <!-- PostgreSQL -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="240">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-solid fa-database" style="color:#336791;"></i>
+          </div>
+          <div class="skill-name">PostgreSQL</div>
+          <div class="skill-desc">Query optimization, indexing, stored procedures</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="82"></div></div>
+          <span class="skill-level">Advanced · 82%</span>
+        </div>
+      </div>
+
+      <!-- MySQL -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="320">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-solid fa-server" style="color:#f29111;"></i>
+          </div>
+          <div class="skill-name">MySQL</div>
+          <div class="skill-desc">Relational DB, normalization, migrations</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="88"></div></div>
+          <span class="skill-level">Expert · 88%</span>
+        </div>
+      </div>
+
+      <!-- Bootstrap -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="400">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-brands fa-bootstrap" style="color:#7952b3;"></i>
+          </div>
+          <div class="skill-name">Bootstrap</div>
+          <div class="skill-desc">Responsive UI, custom themes, components</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="95"></div></div>
+          <span class="skill-level">Expert · 95%</span>
+        </div>
+      </div>
+
+      <!-- Docker -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="480">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-brands fa-docker" style="color:#0db7ed;"></i>
+          </div>
+          <div class="skill-name">Docker</div>
+          <div class="skill-desc">Containerization, Compose, CI/CD pipeline</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="75"></div></div>
+          <span class="skill-level">Proficient · 75%</span>
+        </div>
+      </div>
+
+      <!-- Git -->
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="560">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fa-brands fa-git-alt" style="color:#f34f29;"></i>
+          </div>
+          <div class="skill-name">Git / GitHub</div>
+          <div class="skill-desc">Version control, branching, pull requests, CI</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-level="88"></div></div>
+          <span class="skill-level">Advanced · 88%</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     PORTFOLIO
+════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// projects</span>
+      <h2 class="section-title">Portfolio &amp; Projects</h2>
+      <p class="section-subtitle mx-auto">Koleksi proyek terpilih yang pernah saya kerjakan, dari web hingga mobile.</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-btns justify-content-center reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="mobile">Mobile</button>
+      <button class="filter-btn" data-filter="backend">Backend</button>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Project 1: Corporate Website -->
+      <div class="col-md-6 col-lg-4 project-item reveal" data-cat="web" data-delay="0">
+        <div class="project-card h-100">
+          <div class="project-img-placeholder" style="position:relative;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e,#16213e);opacity:0.7;"></div>
+            <i class="fa-solid fa-building" style="position:relative;z-index:1;"></i>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Web · Laravel</span>
+            <h3 class="project-title">Website Corporate Laravel</h3>
+            <p class="project-desc">Website profil perusahaan dengan CMS custom, manajemen konten dinamis, multi-bahasa, dan halaman landing yang SEO-friendly.</p>
+            <div class="project-tags">
+              <span class="project-tag">Laravel</span>
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">Bootstrap</span>
+              <span class="project-tag">Blade</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: Admin Dashboard -->
+      <div class="col-md-6 col-lg-4 project-item reveal" data-cat="web" data-delay="80">
+        <div class="project-card h-100">
+          <div class="project-img-placeholder" style="position:relative;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f172a,#1e3a5f);opacity:0.7;"></div>
+            <i class="fa-solid fa-chart-line" style="position:relative;z-index:1;"></i>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Web · Dashboard</span>
+            <h3 class="project-title">Admin Dashboard</h3>
+            <p class="project-desc">Dashboard analitik dengan chart real-time, manajemen user, role & permission, notifikasi, dan export laporan ke Excel/PDF.</p>
+            <div class="project-tags">
+              <span class="project-tag">Laravel</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">Alpine.js</span>
+              <span class="project-tag">Chart.js</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Sistem CRUD -->
+      <div class="col-md-6 col-lg-4 project-item reveal" data-cat="backend" data-delay="160">
+        <div class="project-card h-100">
+          <div class="project-img-placeholder" style="position:relative;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1628,#1a2744);opacity:0.7;"></div>
+            <i class="fa-solid fa-database" style="position:relative;z-index:1;"></i>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Backend · API</span>
+            <h3 class="project-title">Sistem CRUD Inventaris</h3>
+            <p class="project-desc">Sistem manajemen inventaris dengan REST API Laravel, autentikasi JWT, filter dinamis, dan dokumentasi Swagger lengkap.</p>
+            <div class="project-tags">
+              <span class="project-tag">Laravel</span>
+              <span class="project-tag">REST API</span>
+              <span class="project-tag">JWT</span>
+              <span class="project-tag">Swagger</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: Flutter App -->
+      <div class="col-md-6 col-lg-4 project-item reveal" data-cat="mobile" data-delay="0">
+        <div class="project-card h-100">
+          <div class="project-img-placeholder" style="position:relative;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a2744,#054775);opacity:0.7;"></div>
+            <i class="fa-solid fa-mobile-screen" style="position:relative;z-index:1;"></i>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn" title="Play Store"><i class="fa-brands fa-google-play"></i></a>
+              <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Mobile · Flutter</span>
+            <h3 class="project-title">Flutter Mobile App</h3>
+            <p class="project-desc">Aplikasi mobile cross-platform (iOS &amp; Android) untuk manajemen tugas dengan notifikasi push, sinkronisasi offline, dan UI modern.</p>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Dart</span>
+              <span class="project-tag">GetX</span>
+              <span class="project-tag">Firebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5: Blog Management -->
+      <div class="col-md-6 col-lg-4 project-item reveal" data-cat="web" data-delay="80">
+        <div class="project-card h-100">
+          <div class="project-img-placeholder" style="position:relative;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0a2e,#2d1b69);opacity:0.7;"></div>
+            <i class="fa-solid fa-pen-nib" style="position:relative;z-index:1;"></i>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Web · CMS</span>
+            <h3 class="project-title">Blog Management System</h3>
+            <p class="project-desc">Platform blogging dengan editor rich-text, manajemen kategori, komentar, SEO meta, RSS feed, dan panel admin yang intuitif.</p>
+            <div class="project-tags">
+              <span class="project-tag">Laravel</span>
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">TinyMCE</span>
+              <span class="project-tag">Bootstrap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6: Dynamic Menu -->
+      <div class="col-md-6 col-lg-4 project-item reveal" data-cat="backend" data-delay="160">
+        <div class="project-card h-100">
+          <div class="project-img-placeholder" style="position:relative;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a0a,#1a3a1a);opacity:0.7;"></div>
+            <i class="fa-solid fa-sitemap" style="position:relative;z-index:1;"></i>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Backend · Laravel</span>
+            <h3 class="project-title">Dynamic Menu Laravel</h3>
+            <p class="project-desc">Sistem navigasi hierarkis yang dapat dikonfigurasi dari admin panel dengan permission-based access dan nested menu tak terbatas.</p>
+            <div class="project-tags">
+              <span class="project-tag">Laravel</span>
+              <span class="project-tag">Spatie</span>
+              <span class="project-tag">PostgreSQL</span>
+              <span class="project-tag">RBAC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /row -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════ -->
+<section id="experience">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-4 reveal">
+        <span class="section-label">// career path</span>
+        <h2 class="section-title">Work<br>Experience</h2>
+        <p class="section-subtitle">Perjalanan profesional yang membentuk keahlian dan pola pikir saya sebagai developer.</p>
+        <div class="mt-4 p-4" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:40px;height:40px;background:var(--gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;flex-shrink:0;">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">3+ Years</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Professional Experience</div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width:40px;height:40px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#22c55e;flex-shrink:0;">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">25+ Projects</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Successfully Delivered</div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <div style="width:40px;height:40px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fbbf24;flex-shrink:0;">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">5-Star Reviews</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">From satisfied clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 reveal" data-delay="150">
+        <div class="timeline">
+
+          <!-- Current Job -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="exp-period">
+                <i class="fa-regular fa-calendar"></i>
+                Jan 2023 — Present
+                <span class="exp-status">● Current</span>
+              </div>
+              <div class="exp-role">Senior Fullstack Developer</div>
+              <div class="exp-company">PT. Digital Nusantara · Jakarta</div>
+              <p class="exp-desc">Memimpin tim pengembangan 4 orang untuk membangun platform SaaS B2B. Bertanggung jawab atas arsitektur backend Laravel, desain database PostgreSQL, dan review kode harian. Berhasil meningkatkan performa API sebesar 60% melalui optimasi query dan caching Redis.</p>
+              <div class="exp-skills">
+                <span class="exp-skill">Laravel</span>
+                <span class="exp-skill">PostgreSQL</span>
+                <span class="exp-skill">Redis</span>
+                <span class="exp-skill">Docker</span>
+                <span class="exp-skill">REST API</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="exp-period"><i class="fa-regular fa-calendar"></i> Jun 2021 — Des 2022</div>
+              <div class="exp-role">Fullstack Web Developer</div>
+              <div class="exp-company">CV. TechSolusi Indonesia · Bandung</div>
+              <p class="exp-desc">Membangun dan memelihara 8+ proyek web untuk berbagai klien, termasuk sistem manajemen sekolah, e-commerce, dan aplikasi HR. Mengimplementasikan integrasi payment gateway Midtrans dan WhatsApp Business API.</p>
+              <div class="exp-skills">
+                <span class="exp-skill">Laravel</span>
+                <span class="exp-skill">MySQL</span>
+                <span class="exp-skill">Bootstrap</span>
+                <span class="exp-skill">jQuery</span>
+                <span class="exp-skill">Midtrans</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="exp-period"><i class="fa-regular fa-calendar"></i> Jan 2021 — Jun 2021</div>
+              <div class="exp-role">Mobile Developer (Flutter) — Internship</div>
+              <div class="exp-company">Startup XYZ · Remote</div>
+              <p class="exp-desc">Magang selama 6 bulan membangun fitur-fitur pada aplikasi Flutter consumer yang telah memiliki 10.000+ pengguna aktif. Fokus pada integrasi API, state management dengan Provider, dan UI implementation dari Figma.</p>
+              <div class="exp-skills">
+                <span class="exp-skill">Flutter</span>
+                <span class="exp-skill">Dart</span>
+                <span class="exp-skill">Provider</span>
+                <span class="exp-skill">REST API</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Freelance -->
+          <div class="timeline-item" style="margin-bottom:0;">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="exp-period"><i class="fa-regular fa-calendar"></i> 2020 — Ongoing</div>
+              <div class="exp-role">Freelance Developer</div>
+              <div class="exp-company">Self-Employed · Remote</div>
+              <p class="exp-desc">Mengerjakan berbagai proyek freelance melalui Upwork, Freelancer, dan referral klien. Spesialisasi pada pengembangan sistem informasi, website UMKM, dan aplikasi manajemen bisnis untuk klien lokal dan internasional.</p>
+              <div class="exp-skills">
+                <span class="exp-skill">Laravel</span>
+                <span class="exp-skill">Flutter</span>
+                <span class="exp-skill">PHP</span>
+                <span class="exp-skill">WordPress</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// get in touch</span>
+      <h2 class="section-title">Let's Work Together</h2>
+      <p class="section-subtitle mx-auto">Punya project menarik? Mari kita diskusikan dan wujudkan bersama!</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-4 reveal" data-delay="0">
+        <a href="https://wa.me/6285224750924" target="_blank" class="contact-card" style="color:inherit;">
+          <div class="contact-icon" style="background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);color:#25d366;">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">+62 852-2475-0924</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Chat langsung, fast response!</div>
+        </a>
+      </div>
+      <div class="col-md-4 reveal" data-delay="100">
+        <a href="mailto:mirhanmaulana15@gmail.com" class="contact-card" style="color:inherit;">
+          <div class="contact-icon" style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.3);color:#3b82f6;">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">mirhanmaulana15@gmail.com</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Respon dalam 24 jam</div>
+        </a>
+      </div>
+      <div class="col-md-4 reveal" data-delay="200">
+        <a href="#" target="_blank" class="contact-card" style="color:inherit;">
+          <div class="contact-icon" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">@mirhan15</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Lihat semua project saya</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="row justify-content-center reveal" data-delay="100">
+      <div class="col-lg-8">
+        <div class="contact-form-wrap">
+          <h3 style="font-weight:700;font-size:1.3rem;color:var(--text-primary);margin-bottom:8px;">
+            Kirim Pesan <i class="fa-solid fa-paper-plane ms-2" style="color:var(--accent-bright);"></i>
+          </h3>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:28px;">Isi form di bawah dan saya akan segera menghubungi Anda.</p>
+          <form id="contactForm" action="https://formspree.io/f/xqendgyb" method="POST" novalidate>
+            <div class="row g-4">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" name="nama" class="form-control" placeholder="John Doe" required />
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="john@example.com" required />
+              </div>
+              <div class="col-12 form-group">
+                <label class="form-label">Topik / Subject</label>
+                <input type="text" name="subject" class="form-control" placeholder="Pengembangan Website E-Commerce" />
+              </div>
+              <div class="col-12 form-group">
+                <label class="form-label">Pesan</label>
+                <textarea name="pesan" class="form-control" rows="5" placeholder="Ceritakan project Anda..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-primary-custom w-100 justify-content-center" style="padding:16px;">
+                  <i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand"><span>&lt;</span>MirhanM<span>/&gt;</span></div>
+        <div class="footer-tagline">Fullstack Developer · Jakarta, Indonesia</div>
+      </div>
+      <div class="col-lg-4 text-lg-center">
+        <div class="d-flex gap-3 justify-content-lg-center flex-wrap">
+          <a href="#about" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">About</a>
+          <a href="#skills" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Skills</a>
+          <a href="#portfolio" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Portfolio</a>
+          <a href="#experience" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Experience</a>
+          <a href="#contact" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Contact</a>
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex justify-content-lg-end">
+        <div class="footer-social">
+          <a href="https://github.com/alexrizky" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/in/alexrizky" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://wa.me/6285224750924" target="_blank" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="mailto:mirhanmaulana15@gmail.com" class="social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://instagram.com/alexrizky" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <span class="footer-copy">© 2026 Mirhan Maulana. All rights reserved.</span>
+      <span class="footer-copy" style="font-family:var(--font-mono);">Built with <i class="fa-solid fa-heart" style="color:#e05c5c;"></i> using Laravel &amp; Bootstrap 5</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="backTop" title="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="js/script.js"></script>
+</body>
+</html>

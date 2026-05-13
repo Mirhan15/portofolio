@@ -1535,8 +1535,10 @@ footer {
 .skill-badge-proficient { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; }
 
 /* ── Animations ── */
+@keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
 
 
 @keyframes fadeInRight {
@@ -1595,6 +1597,35 @@ footer {
   .about-avatar-wrap { width: 260px; height: 260px; }
   .about-avatar-ring { width: 180px; height: 180px; }
   .about-avatar-initials { font-size: 2.8rem; }
+
+  #mainNav { overflow: visible !important; }
+
+  .navbar-collapse.show {
+    display: block !important;
+    background: #05070f;
+    border: 1px solid rgba(37,99,235,0.4);
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 8px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+
+  [data-theme="light"] .navbar-collapse.show {
+    background: #f8faff;
+  }
+
+  .navbar-collapse.show .nav-link {
+    color: var(--text-primary) !important;
+    padding: 10px 16px !important;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .navbar-collapse.show .nav-link:hover {
+    background: rgba(37,99,235,0.1);
+    color: #3b82f6 !important;
+  }
 }
 
 @media (max-width: 767.98px) {

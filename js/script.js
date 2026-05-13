@@ -159,14 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── Smooth Nav Close on Mobile ── */
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      const navCollapse = document.getElementById('navbarNav');
-      if (navCollapse.classList.contains('show')) {
-        bootstrap.Collapse.getInstance(navCollapse)?.hide();
-      }
-    });
-  });
 
   /* ── Back to Top ── */
   const backTop = document.getElementById('backTop');

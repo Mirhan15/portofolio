@@ -44,7 +44,7 @@
       <div class="dark-toggle" id="darkToggle" title="Toggle theme">
         <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
       </div>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" title="Toggle navigation">
+      <button class="navbar-toggler" type="button" aria-label="Toggle navigation" title="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
@@ -961,6 +961,12 @@
 <!-- Custom JS -->
 <script src="js/script.js"></script>
 <script type="module" src="js/messages.js"></script>
+<script>
+  // Hamburger toggle
+  document.querySelector('.navbar-toggler').addEventListener('click', function() {
+    document.getElementById('navbarNav').classList.toggle('show');
+  });
+</script>
 <!-- Char counter -->
 <script>
   const msgText = document.getElementById('msgText');

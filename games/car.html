@@ -1,1 +1,267 @@
-﻿
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Dodge — Mirhan Maulana</title>
+  <link rel="icon" type="image/png" href="../assets/images/MirhanLog.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/games.css" />
+  <style>
+    body { background: #05070f; overflow: hidden; }
+    #mainNav { position: fixed; }
+    .car-wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 60px; }
+    #carCanvas { display: block; border-radius: 12px; border: 1px solid rgba(56,189,248,0.2); max-width: 100%; max-height: calc(100vh - 80px); }
+    .hud { position: fixed; top: 68px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 8px 20px; pointer-events: none; z-index: 100; }
+    .hud-stat { background: rgba(5,7,15,0.85); border: 1px solid rgba(56,189,248,0.25); border-radius: 8px; padding: 6px 14px; font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8; display: flex; align-items: center; gap: 6px; }
+    .hud-stat span { color: #f0f4ff; font-weight: 700; }
+    .game-overlay { position: fixed; inset: 0; background: rgba(5,7,15,0.92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; z-index: 200; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+    .game-overlay.hidden { display: none; }
+    .ov-emoji { font-size: 4rem; line-height: 1; }
+    .ov-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: #f0f4ff; }
+    .ov-sub { font-family: var(--font-mono); font-size: 0.82rem; color: #8892a4; text-align: center; line-height: 1.7; }
+    .ov-score { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: #38bdf8; }
+    .ov-btn { background: linear-gradient(135deg,#0284c7,#38bdf8); border: none; color: white; padding: 12px 32px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); }
+    .ov-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,0.4); }
+    .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 300; background: rgba(5,7,15,0.85); border: 1px solid rgba(255,255,255,0.1); color: #8892a4; padding: 8px 16px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.72rem; text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; }
+    .back-btn:hover { color: #38bdf8; border-color: rgba(56,189,248,0.3); }
+    .mob-controls { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: none; gap: 16px; z-index: 300; }
+    .mob-btn { width: 64px; height: 64px; background: rgba(5,7,15,0.85); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; color: #38bdf8; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; cursor: pointer; -webkit-tap-highlight-color: transparent; user-select: none; }
+    .mob-btn:active { background: rgba(56,189,248,0.15); }
+    @media (max-width: 768px) { .mob-controls { display: flex; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html"><span>&lt;</span>Mirhan Maulana<span class="accent">/&gt;</span></a>
+    <div class="d-flex align-items-center gap-3">
+      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
+        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="hud">
+  <div class="hud-stat">⭐ Score <span id="scoreVal">0</span></div>
+  <div class="hud-stat">🏎️ Speed <span id="speedVal">1</span></div>
+  <div class="hud-stat">🏆 Best <span id="bestVal">0</span></div>
+</div>
+
+<div class="car-wrap"><canvas id="carCanvas"></canvas></div>
+
+<div class="mob-controls">
+  <button class="mob-btn" id="mobLeft"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="mob-btn" id="mobRight"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<div class="game-overlay" id="overlay">
+  <div class="ov-emoji">🚗</div>
+  <div class="ov-title">Car Dodge</div>
+  <div class="ov-sub">Hindari mobil lain! Makin lama makin cepat.</div>
+  <button class="ov-btn" id="startBtn"><i class="fa-solid fa-play"></i> Start</button>
+  <div class="ov-sub" style="font-size:0.72rem;color:#4a5568">← → / A D — Pindah lajur</div>
+</div>
+
+<a href="../games.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Games</a>
+
+<script>
+  const darkToggle = document.getElementById('darkToggle');
+  const html = document.documentElement;
+  html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+  darkToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next); localStorage.setItem('theme', next);
+  });
+
+  const canvas = document.getElementById('carCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = Math.min(window.innerWidth, 360);
+    canvas.height = Math.min(window.innerHeight - 80, 600);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const LANES = 3;
+  const CAR_W = 40, CAR_H = 70;
+  const ENEMY_CARS = ['🚕','🚙','🚌','🚎','🏎️'];
+
+  let player, enemies, roadLines, score, speed, running, animId, keys = {};
+  let spawnTimer = 0;
+  let best = parseInt(localStorage.getItem('carBest') || '0');
+  document.getElementById('bestVal').textContent = best;
+
+  function getLaneX(lane) {
+    const laneW = canvas.width / LANES;
+    return laneW * lane + laneW / 2;
+  }
+
+  function init() {
+    player = { lane: 1, x: getLaneX(1), y: canvas.height - CAR_H - 20, w: CAR_W, h: CAR_H, targetX: getLaneX(1) };
+    enemies = [];
+    roadLines = [];
+    score = 0; speed = 3; spawnTimer = 0; running = true;
+
+    for (let i = 0; i < 5; i++) {
+      roadLines.push({ y: i * (canvas.height / 5) });
+    }
+
+    overlay.classList.add('hidden');
+    if (animId) cancelAnimationFrame(animId);
+    lastTime = 0;
+    requestAnimationFrame(loop);
+  }
+
+  function spawnEnemy() {
+    const lane = Math.floor(Math.random() * LANES);
+    enemies.push({
+      lane, x: getLaneX(lane),
+      y: -CAR_H,
+      w: CAR_W, h: CAR_H,
+      emoji: ENEMY_CARS[Math.floor(Math.random() * ENEMY_CARS.length)],
+    });
+  }
+
+  function update(dt) {
+    // Move player toward target
+    const dx = player.targetX - player.x;
+    player.x += dx * 0.2;
+
+    // Road lines
+    roadLines.forEach(l => {
+      l.y += speed;
+      if (l.y > canvas.height) l.y -= canvas.height;
+    });
+
+    // Spawn enemies
+    spawnTimer += dt;
+    const spawnInterval = Math.max(600, 1400 - score * 2);
+    if (spawnTimer >= spawnInterval) {
+      spawnEnemy();
+      spawnTimer = 0;
+    }
+
+    // Move enemies
+    enemies.forEach(e => { e.y += speed; });
+    enemies = enemies.filter(e => e.y < canvas.height + CAR_H);
+
+    // Score & speed
+    score++;
+    speed = 3 + Math.floor(score / 200) * 0.5;
+    document.getElementById('scoreVal').textContent = score;
+    document.getElementById('speedVal').textContent = Math.floor(speed);
+
+    // Collision
+    enemies.forEach(e => {
+      if (Math.abs(e.x - player.x) < CAR_W * 0.8 &&
+          Math.abs(e.y - player.y) < CAR_H * 0.8) {
+        gameOver();
+      }
+    });
+  }
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+
+    // Road
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, W, H);
+
+    // Lane dividers
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([30, 20]);
+    for (let i = 1; i < LANES; i++) {
+      const x = (W / LANES) * i;
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Road lines (speed effect)
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([40, 30]);
+    roadLines.forEach(l => {
+      ctx.beginPath(); ctx.moveTo(W/2, l.y); ctx.lineTo(W/2, l.y + 40); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    // Enemies
+    enemies.forEach(e => {
+      ctx.font = `${CAR_H * 0.7}px serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(e.emoji, e.x, e.y);
+    });
+
+    // Player
+    ctx.save();
+    ctx.shadowColor = '#38bdf8';
+    ctx.shadowBlur = 20;
+    ctx.font = `${CAR_H * 0.7}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🚗', player.x, player.y);
+    ctx.restore();
+  }
+
+  function gameOver() {
+    running = false;
+    cancelAnimationFrame(animId);
+    const isNew = score > best;
+    if (isNew) { best = score; localStorage.setItem('carBest', best); }
+    document.getElementById('bestVal').textContent = best;
+
+    overlay.classList.remove('hidden');
+    overlay.innerHTML = `
+      <div class="ov-emoji">💥</div>
+      <div class="ov-title">Game Over!</div>
+      <div class="ov-score">Score: ${score}</div>
+      <div class="ov-sub">${isNew ? '🏆 New Best Score!' : `Best: ${best}`}</div>
+      <button class="ov-btn" id="startBtn"><i class="fa-solid fa-rotate-right"></i> Play Again</button>
+      <a href="../games.html" style="font-family:var(--font-mono);font-size:0.75rem;color:#4a5568;text-decoration:none;">← Back to Games</a>
+    `;
+    document.getElementById('startBtn').addEventListener('click', init);
+  }
+
+  let lastTime = 0;
+  function loop(ts) {
+    const dt = Math.min(ts - lastTime, 50); lastTime = ts;
+    if (!running) return;
+    update(dt); draw();
+    animId = requestAnimationFrame(loop);
+  }
+
+  // Input
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'ArrowLeft' || e.key === 'a') && player.lane > 0) {
+      player.lane--;
+      player.targetX = getLaneX(player.lane);
+    }
+    if ((e.key === 'ArrowRight' || e.key === 'd') && player.lane < LANES - 1) {
+      player.lane++;
+      player.targetX = getLaneX(player.lane);
+    }
+  });
+
+  document.getElementById('mobLeft').addEventListener('touchstart', e => {
+    e.preventDefault();
+    if (player.lane > 0) { player.lane--; player.targetX = getLaneX(player.lane); }
+  }, { passive: false });
+
+  document.getElementById('mobRight').addEventListener('touchstart', e => {
+    e.preventDefault();
+    if (player.lane < LANES - 1) { player.lane++; player.targetX = getLaneX(player.lane); }
+  }, { passive: false });
+
+  document.getElementById('startBtn').addEventListener('click', init);
+</script>
+</body>
+</html>

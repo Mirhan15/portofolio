@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Game — Mirhan Maulana</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-family='Arial' font-weight='bold' font-size='42' text-anchor='middle' fill='white'>MM</text></svg>" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/games.css" />
+  <style>
+    body { background: var(--bg-primary); }
+
+    .snake-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 16px 60px;
+    }
+
+    .snake-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .snake-header {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .snake-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-bright);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .snake-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* Stats */
+    .snake-stats {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    .snake-stat {
+      text-align: center;
+    }
+
+    .snake-stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      display: block;
+    }
+
+    .snake-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Canvas */
+    #snakeCanvas {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: block;
+      background: #080d1a;
+      max-width: 100%;
+    }
+
+    /* Overlay */
+    .canvas-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .game-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: rgba(8, 13, 26, 0.88);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      backdrop-filter: blur(4px);
+    }
+
+    .game-overlay.hidden { display: none; }
+
+    .overlay-emoji { font-size: 3rem; line-height: 1; }
+
+    .overlay-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .overlay-sub {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .overlay-score {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-bright);
+    }
+
+    /* Buttons */
+    .snake-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .s-btn {
+      background: var(--gradient);
+      border: none;
+      color: white;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+    }
+
+    .s-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+
+    .s-btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-accent);
+      color: var(--accent-bright);
+    }
+
+    .s-btn-outline:hover { background: var(--accent-subtle); box-shadow: none; }
+
+    /* Mobile D-Pad */
+    .dpad {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .dpad-row { display: flex; gap: 4px; }
+
+    .dpad-btn {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .dpad-btn:active {
+      background: var(--accent-subtle);
+      border-color: var(--accent-bright);
+      color: var(--accent-bright);
+      transform: scale(0.92);
+    }
+
+    .dpad-center {
+      width: 52px;
+      height: 52px;
+      background: transparent;
+    }
+
+    @media (max-width: 600px) {
+      .dpad { display: flex; }
+    }
+
+    /* Speed indicator */
+    .speed-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--accent-subtle);
+      border: 1px solid var(--border-accent);
+      color: var(--accent-bright);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">
+      <span>&lt;</span>Mirhan Maulana<span class="accent">/&gt;</span>
+    </a>
+    <div class="d-flex align-items-center gap-3">
+      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
+        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="snake-wrap">
+
+  <!-- Back -->
+  <a href="../games.html" class="game-back-btn mb-3">
+    <i class="fa-solid fa-arrow-left"></i> Back to Games
+  </a>
+
+  <div class="snake-panel">
+
+    <!-- Header -->
+    <div class="snake-header">
+      <div class="snake-title">🐍 Snake Game</div>
+      <span class="speed-badge" id="speedBadge">Speed: 1</span>
+    </div>
+
+    <!-- Body -->
+    <div class="snake-body">
+
+      <!-- Stats -->
+      <div class="snake-stats">
+        <div class="snake-stat">
+          <span class="snake-stat-val" id="scoreVal">0</span>
+          <span class="snake-stat-lbl">Score</span>
+        </div>
+        <div class="snake-stat">
+          <span class="snake-stat-val" id="highVal">0</span>
+          <span class="snake-stat-lbl">Best</span>
+        </div>
+        <div class="snake-stat">
+          <span class="snake-stat-val" id="lengthVal">1</span>
+          <span class="snake-stat-lbl">Length</span>
+        </div>
+      </div>
+
+      <!-- Canvas -->
+      <div class="canvas-wrap">
+        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+
+        <!-- Start Overlay -->
+        <div class="game-overlay" id="overlay">
+          <div class="overlay-emoji" id="overlayEmoji">🐍</div>
+          <div class="overlay-title" id="overlayTitle">Snake Game</div>
+          <div class="overlay-sub" id="overlaySub">Tekan Start atau Space untuk mulai</div>
+          <div class="overlay-score hidden" id="overlayScore"></div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="snake-btns">
+        <button class="s-btn" id="startBtn">
+          <i class="fa-solid fa-play"></i> Start
+        </button>
+        <button class="s-btn s-btn-outline" id="pauseBtn" disabled>
+          <i class="fa-solid fa-pause"></i> Pause
+        </button>
+      </div>
+
+      <!-- Mobile D-Pad -->
+      <div class="dpad" id="dpad">
+        <div class="dpad-row">
+          <div class="dpad-center"></div>
+          <button class="dpad-btn" data-dir="UP"><i class="fa-solid fa-chevron-up"></i></button>
+          <div class="dpad-center"></div>
+        </div>
+        <div class="dpad-row">
+          <button class="dpad-btn" data-dir="LEFT"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="dpad-center"></div>
+          <button class="dpad-btn" data-dir="RIGHT"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="dpad-row">
+          <div class="dpad-center"></div>
+          <button class="dpad-btn" data-dir="DOWN"><i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dpad-center"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Dark Mode ──
+  const darkToggle = document.getElementById('darkToggle');
+  const html = document.documentElement;
+  html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+  darkToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ── Canvas Setup ──
+  const canvas = document.getElementById('snakeCanvas');
+  const ctx = canvas.getContext('2d');
+  const GRID = 20;
+  const COLS = canvas.width / GRID;   // 20
+  const ROWS = canvas.height / GRID;  // 20
+
+  // ── State ──
+  let snake, dir, nextDir, food, bonus;
+  let score, highScore, gameLoop, running, paused;
+
+  // ── DOM ──
+  const scoreEl   = document.getElementById('scoreVal');
+  const highEl    = document.getElementById('highVal');
+  const lengthEl  = document.getElementById('lengthVal');
+  const speedEl   = document.getElementById('speedBadge');
+  const overlay   = document.getElementById('overlay');
+  const oEmoji    = document.getElementById('overlayEmoji');
+  const oTitle    = document.getElementById('overlayTitle');
+  const oSub      = document.getElementById('overlaySub');
+  const oScore    = document.getElementById('overlayScore');
+  const startBtn  = document.getElementById('startBtn');
+  const pauseBtn  = document.getElementById('pauseBtn');
+
+  highScore = parseInt(localStorage.getItem('snakeHigh') || '0');
+  highEl.textContent = highScore;
+
+  // ── Init ──
+  function init() {
+    snake   = [{ x: 10, y: 10 }];
+    dir     = { x: 1, y: 0 };
+    nextDir = { x: 1, y: 0 };
+    score   = 0;
+    bonus   = null;
+    scoreEl.textContent  = 0;
+    lengthEl.textContent = 1;
+    spawnFood();
+    drawFrame();
+  }
+
+  // ── Food ──
+  function spawnFood() {
+    do {
+      food = {
+        x: Math.floor(Math.random() * COLS),
+        y: Math.floor(Math.random() * ROWS)
+      };
+    } while (snake.some(s => s.x === food.x && s.y === food.y));
+  }
+
+  // ── Speed based on score ──
+  function getInterval() {
+    if (score >= 200) return 65;
+    if (score >= 150) return 75;
+    if (score >= 100) return 90;
+    if (score >= 60)  return 105;
+    if (score >= 30)  return 120;
+    return 140;
+  }
+
+  function getSpeedLevel() {
+    if (score >= 200) return 6;
+    if (score >= 150) return 5;
+    if (score >= 100) return 4;
+    if (score >= 60)  return 3;
+    if (score >= 30)  return 2;
+    return 1;
+  }
+
+  // ── Game Tick ──
+  function tick() {
+    dir = { ...nextDir };
+
+    const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+    // Wall collision
+    if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS) {
+      return gameOver();
+    }
+
+    // Self collision
+    if (snake.some(s => s.x === head.x && s.y === head.y)) {
+      return gameOver();
+    }
+
+    snake.unshift(head);
+
+    // Eat food
+    if (head.x === food.x && head.y === food.y) {
+      score += 10;
+      scoreEl.textContent = score;
+      lengthEl.textContent = snake.length;
+      speedEl.textContent = `Speed: ${getSpeedLevel()}`;
+      if (score > highScore) {
+        highScore = score;
+        highEl.textContent = highScore;
+        localStorage.setItem('snakeHigh', highScore);
+      }
+      spawnFood();
+      // Restart loop with new speed
+      clearInterval(gameLoop);
+      gameLoop = setInterval(tick, getInterval());
+    } else {
+      snake.pop();
+    }
+
+    drawFrame();
+  }
+
+  // ── Draw ──
+  function drawFrame() {
+    // Background
+    ctx.fillStyle = '#080d1a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Grid dots
+    ctx.fillStyle = 'rgba(37,99,235,0.06)';
+    for (let x = 0; x < COLS; x++) {
+      for (let y = 0; y < ROWS; y++) {
+        ctx.fillRect(x * GRID + GRID / 2 - 1, y * GRID + GRID / 2 - 1, 2, 2);
+      }
+    }
+
+    // Food
+    const fx = food.x * GRID + GRID / 2;
+    const fy = food.y * GRID + GRID / 2;
+    ctx.save();
+    ctx.shadowColor = '#ef4444';
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = '#ef4444';
+    ctx.beginPath();
+    ctx.arc(fx, fy, GRID / 2 - 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // Apple stem
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(fx, fy - GRID / 2 + 4);
+    ctx.lineTo(fx + 3, fy - GRID / 2 + 1);
+    ctx.stroke();
+
+    // Snake
+    snake.forEach((seg, i) => {
+      const x = seg.x * GRID;
+      const y = seg.y * GRID;
+      const pad = 1;
+
+      if (i === 0) {
+        // Head
+        ctx.save();
+        ctx.shadowColor = '#22c55e';
+        ctx.shadowBlur = 16;
+        ctx.fillStyle = '#22c55e';
+        roundRect(ctx, x + pad, y + pad, GRID - pad * 2, GRID - pad * 2, 5);
+        ctx.fill();
+        ctx.restore();
+
+        // Eyes
+        const eyeSize = 3;
+        ctx.fillStyle = '#080d1a';
+        if (dir.x === 1) {
+          ctx.fillRect(x + GRID - 7, y + 4, eyeSize, eyeSize);
+          ctx.fillRect(x + GRID - 7, y + GRID - 7, eyeSize, eyeSize);
+        } else if (dir.x === -1) {
+          ctx.fillRect(x + 4, y + 4, eyeSize, eyeSize);
+          ctx.fillRect(x + 4, y + GRID - 7, eyeSize, eyeSize);
+        } else if (dir.y === -1) {
+          ctx.fillRect(x + 4, y + 4, eyeSize, eyeSize);
+          ctx.fillRect(x + GRID - 7, y + 4, eyeSize, eyeSize);
+        } else {
+          ctx.fillRect(x + 4, y + GRID - 7, eyeSize, eyeSize);
+          ctx.fillRect(x + GRID - 7, y + GRID - 7, eyeSize, eyeSize);
+        }
+      } else {
+        // Body gradient
+        const ratio = i / snake.length;
+        const g = Math.floor(180 - ratio * 80);
+        ctx.fillStyle = `rgb(0, ${g}, 60)`;
+        roundRect(ctx, x + pad, y + pad, GRID - pad * 2, GRID - pad * 2, 4);
+        ctx.fill();
+      }
+    });
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  // ── Game Over ──
+  function gameOver() {
+    clearInterval(gameLoop);
+    running = false;
+    paused  = false;
+    pauseBtn.disabled = true;
+    startBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Restart';
+
+    oEmoji.textContent = '💀';
+    oTitle.textContent = 'Game Over!';
+    oSub.textContent   = `Panjang: ${snake.length} | Speed: ${getSpeedLevel()}`;
+    oScore.textContent = `Score: ${score}  |  Best: ${highScore}`;
+    oScore.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+  }
+
+  // ── Start / Restart ──
+  function startGame() {
+    clearInterval(gameLoop);
+    init();
+    running = true;
+    paused  = false;
+    overlay.classList.add('hidden');
+    pauseBtn.disabled = false;
+    pauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+    startBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Restart';
+    gameLoop = setInterval(tick, getInterval());
+  }
+
+  // ── Pause ──
+  function togglePause() {
+    if (!running) return;
+    if (paused) {
+      paused = false;
+      overlay.classList.add('hidden');
+      pauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+      gameLoop = setInterval(tick, getInterval());
+    } else {
+      paused = true;
+      clearInterval(gameLoop);
+      pauseBtn.innerHTML = '<i class="fa-solid fa-play"></i> Resume';
+      oEmoji.textContent = '⏸️';
+      oTitle.textContent = 'Paused';
+      oSub.textContent   = 'Tekan Pause lagi atau Space untuk lanjut';
+      oScore.classList.add('hidden');
+      overlay.classList.remove('hidden');
+    }
+  }
+
+  // ── Controls ──
+  const DIRS = {
+    ArrowUp:    { x: 0, y: -1 },
+    ArrowDown:  { x: 0, y: 1 },
+    ArrowLeft:  { x: -1, y: 0 },
+    ArrowRight: { x: 1, y: 0 },
+    w: { x: 0, y: -1 },
+    s: { x: 0, y: 1 },
+    a: { x: -1, y: 0 },
+    d: { x: 1, y: 0 },
+  };
+
+  document.addEventListener('keydown', e => {
+    if (e.key === ' ') {
+      e.preventDefault();
+      if (!running) startGame();
+      else togglePause();
+      return;
+    }
+    if (!running || paused) return;
+    const d = DIRS[e.key];
+    if (!d) return;
+    // Prevent reversing
+    if (d.x === -dir.x && d.y === -dir.y) return;
+    nextDir = d;
+    e.preventDefault();
+  });
+
+  // D-Pad
+  document.querySelectorAll('.dpad-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!running || paused) return;
+      const map = { UP: {x:0,y:-1}, DOWN: {x:0,y:1}, LEFT: {x:-1,y:0}, RIGHT: {x:1,y:0} };
+      const d = map[btn.dataset.dir];
+      if (d.x === -dir.x && d.y === -dir.y) return;
+      nextDir = d;
+    });
+  });
+
+  startBtn.addEventListener('click', startGame);
+  pauseBtn.addEventListener('click', togglePause);
+
+  // ── Initial Draw ──
+  init();
+</script>
+</body>
+</html>

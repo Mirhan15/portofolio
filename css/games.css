@@ -1,0 +1,243 @@
+/* ============================================
+   GAMES.CSS — Games Hub Page
+   ============================================ */
+
+/* Hero */
+#games-hero {
+  padding: 120px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.games-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.games-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 12px 0 16px;
+}
+
+.games-hero-title span { font-style: normal; }
+
+.games-hero-sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Games List Section */
+#games-list {
+  padding: 40px 0 100px;
+}
+
+/* Game Select Card */
+.game-select-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-select-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.game-select-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  color: inherit;
+}
+
+.game-select-card:hover::before { opacity: 0.04; }
+
+.gsc-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.game-select-card:hover .gsc-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.gsc-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.gsc-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.gsc-desc {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.gsc-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.gsc-meta span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gsc-play {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-bright);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.game-select-card:hover .gsc-play { gap: 12px; }
+
+/* ── Shared Game Page Styles ── */
+.game-page-wrap {
+  min-height: 100vh;
+  padding: 100px 0 60px;
+}
+
+.game-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: 32px;
+  transition: var(--transition);
+  font-family: var(--font-mono);
+}
+
+.game-back-btn:hover { color: var(--accent-bright); }
+
+.game-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.game-panel-header {
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-panel-title {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-bright);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-panel-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.game-stat-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.game-stat {
+  text-align: center;
+}
+
+.game-stat-val {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  display: block;
+}
+
+.game-stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.game-btn-row {
+  display: flex;
+  gap: 10px;
+}

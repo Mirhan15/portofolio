@@ -1,0 +1,711 @@
+﻿<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whack-a-Mole — Mirhan Maulana</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-family='Arial' font-weight='bold' font-size='42' text-anchor='middle' fill='white'>MM</text></svg>" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/games.css" />
+  <style>
+    body { background: var(--bg-primary); }
+
+    .whack-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 16px 60px;
+    }
+
+    .whack-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .whack-header {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .whack-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f87171;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .diff-badge-red {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(248,113,113,0.12);
+      border: 1px solid rgba(248,113,113,0.3);
+      color: #f87171;
+    }
+
+    .whack-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Stats */
+    .whack-stats {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .w-stat { text-align: center; }
+
+    .w-stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      display: block;
+    }
+
+    .w-stat-val.red { color: #f87171; }
+
+    .w-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Timer bar */
+    .timer-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .timer-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #f87171, #dc2626);
+      border-radius: 100px;
+      width: 100%;
+      transition: width 1s linear;
+    }
+
+    /* Difficulty */
+    .w-diff-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .w-diff-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: var(--font-mono);
+    }
+
+    .w-diff-btn:hover { border-color: #f87171; color: #f87171; }
+    .w-diff-btn.active {
+      background: rgba(248,113,113,0.12);
+      border-color: #f87171;
+      color: #f87171;
+    }
+
+    /* Grid */
+    .mole-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    /* Hole */
+    .hole {
+      aspect-ratio: 1;
+      position: relative;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .hole-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 70%, #0a0e1a 60%, #111827 100%);
+      border: 2px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+
+    .hole:hover .hole-bg { border-color: rgba(248,113,113,0.3); }
+
+    /* Mole */
+    .mole {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      font-size: clamp(2rem, 8vw, 3rem);
+      line-height: 1;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.5));
+    }
+
+    .hole.active .mole {
+      transform: translateX(-50%) translateY(10%);
+    }
+
+    /* Bomb hole */
+    .hole.bomb .hole-bg {
+      border-color: rgba(251,191,36,0.4);
+      background: radial-gradient(ellipse at 50% 70%, #1a1200 60%, #2a1f00 100%);
+    }
+
+    /* Hit flash */
+    .hole.hit .hole-bg {
+      border-color: rgba(34,197,94,0.6);
+      background: radial-gradient(ellipse at 50% 70%, #001a08 60%, #002a10 100%);
+    }
+
+    .hole.bombed .hole-bg {
+      border-color: rgba(239,68,68,0.6);
+      background: radial-gradient(ellipse at 50% 70%, #1a0000 60%, #2a0000 100%);
+    }
+
+    /* Score pop */
+    .score-pop {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 800;
+      pointer-events: none;
+      z-index: 10;
+      animation: popUp 0.7s ease forwards;
+    }
+
+    .score-pop.plus  { color: #22c55e; }
+    .score-pop.minus { color: #ef4444; }
+
+    @keyframes popUp {
+      0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-40px); }
+    }
+
+    /* Buttons */
+    .w-btns { display: flex; gap: 10px; }
+
+    .w-btn {
+      background: linear-gradient(135deg, #dc2626, #f87171);
+      border: none;
+      color: white;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+    }
+
+    .w-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(248,113,113,0.4); }
+
+    .w-btn-outline {
+      background: transparent;
+      border: 1px solid rgba(248,113,113,0.4);
+      color: #f87171;
+    }
+
+    .w-btn-outline:hover { background: rgba(248,113,113,0.1); box-shadow: none; }
+
+    /* Result */
+    .w-result {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 24px;
+      background: rgba(248,113,113,0.06);
+      border: 1px solid rgba(248,113,113,0.2);
+      border-radius: 14px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .w-result.show { display: flex; }
+
+    .w-result-emoji { font-size: 2.8rem; line-height: 1; }
+
+    .w-result-score {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      color: #f87171;
+      line-height: 1;
+    }
+
+    .w-result-score span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .w-result-detail {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .w-rank {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 100px;
+    }
+
+    .w-best {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    /* Countdown overlay */
+    .countdown-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+    }
+
+    .countdown-overlay.show { display: flex; }
+
+    .countdown-num {
+      font-family: var(--font-heading);
+      font-size: 5rem;
+      font-weight: 800;
+      color: #f87171;
+      animation: countPop 0.8s ease;
+    }
+
+    @keyframes countPop {
+      0%   { transform: scale(1.5); opacity: 0; }
+      40%  { transform: scale(1);   opacity: 1; }
+      80%  { transform: scale(1);   opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0; }
+    }
+
+    /* Hint */
+    .hint-text {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .hint-text span { color: #f87171; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">
+      <span>&lt;</span>Mirhan Maulana<span class="accent">/&gt;</span>
+    </a>
+    <div class="d-flex align-items-center gap-3">
+      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
+        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="whack-wrap">
+
+  <a href="../games.html" class="game-back-btn mb-3">
+    <i class="fa-solid fa-arrow-left"></i> Back to Games
+  </a>
+
+  <div class="whack-panel">
+
+    <div class="whack-header">
+      <div class="whack-title">🎯 Whack-a-Mole</div>
+      <span class="diff-badge-red" id="diffLabel">Normal · 30s</span>
+    </div>
+
+    <div class="whack-body">
+
+      <!-- Stats -->
+      <div class="whack-stats">
+        <div class="w-stat">
+          <span class="w-stat-val red" id="scoreVal">0</span>
+          <span class="w-stat-lbl">Score</span>
+        </div>
+        <div class="w-stat">
+          <span class="w-stat-val" id="hitVal">0</span>
+          <span class="w-stat-lbl">Hits</span>
+        </div>
+        <div class="w-stat">
+          <span class="w-stat-val" id="missVal">0</span>
+          <span class="w-stat-lbl">Miss</span>
+        </div>
+        <div class="w-stat">
+          <span class="w-stat-val" id="comboVal">0x</span>
+          <span class="w-stat-lbl">Combo</span>
+        </div>
+        <div class="w-stat">
+          <span class="w-stat-val" id="timeVal">30</span>
+          <span class="w-stat-lbl">Time</span>
+        </div>
+      </div>
+
+      <!-- Timer bar -->
+      <div class="timer-bar-wrap">
+        <div class="timer-bar" id="timerBar"></div>
+      </div>
+
+      <!-- Difficulty -->
+      <div class="w-diff-btns">
+        <button class="w-diff-btn" data-diff="easy">Easy</button>
+        <button class="w-diff-btn active" data-diff="normal">Normal</button>
+        <button class="w-diff-btn" data-diff="hard">Hard</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="mole-grid" id="moleGrid"></div>
+
+      <!-- Hint -->
+      <div class="hint-text">
+        Klik <span>🐭 tikus</span> untuk poin · Jangan klik <span>💣 bom</span>!
+      </div>
+
+      <!-- Result -->
+      <div class="w-result" id="wResult">
+        <div class="w-result-emoji" id="wResultEmoji">🏆</div>
+        <div class="w-result-score" id="wResultScore">0 <span>pts</span></div>
+        <div class="w-rank" id="wRank"></div>
+        <div class="w-result-detail" id="wResultDetail"></div>
+        <div class="w-best" id="wBest"></div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="w-btns">
+        <button class="w-btn" id="startBtn">
+          <i class="fa-solid fa-play"></i> Start
+        </button>
+        <button class="w-btn w-btn-outline" id="restartBtn" style="display:none">
+          <i class="fa-solid fa-rotate-right"></i> Restart
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Dark Mode ──
+  const darkToggle = document.getElementById('darkToggle');
+  const html = document.documentElement;
+  html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+  darkToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ── Config ──
+  const DIFFS = {
+    easy:   { duration: 30, moleTime: 1400, interval: 1000, bombChance: 0,    label: 'Easy · 30s' },
+    normal: { duration: 30, moleTime: 1000, interval: 750,  bombChance: 0.15, label: 'Normal · 30s' },
+    hard:   { duration: 30, moleTime: 650,  interval: 550,  bombChance: 0.25, label: 'Hard · 30s' },
+  };
+
+  const HOLES = 9;
+
+  // ── State ──
+  let score, hits, misses, combo, maxCombo;
+  let timeLeft, timerInterval, moleInterval;
+  let activeMoles, running;
+  let currentDiff = 'normal';
+  let bestScores = {};
+
+  try { bestScores = JSON.parse(localStorage.getItem('whackBest') || '{}'); } catch(e) {}
+
+  // ── DOM ──
+  const scoreEl   = document.getElementById('scoreVal');
+  const hitEl     = document.getElementById('hitVal');
+  const missEl    = document.getElementById('missVal');
+  const comboEl   = document.getElementById('comboVal');
+  const timeEl    = document.getElementById('timeVal');
+  const timerBar  = document.getElementById('timerBar');
+  const diffLabel = document.getElementById('diffLabel');
+  const moleGrid  = document.getElementById('moleGrid');
+  const wResult   = document.getElementById('wResult');
+  const startBtn  = document.getElementById('startBtn');
+  const restartBtn = document.getElementById('restartBtn');
+
+  // ── Build Grid ──
+  function buildGrid() {
+    moleGrid.innerHTML = '';
+    for (let i = 0; i < HOLES; i++) {
+      const hole = document.createElement('div');
+      hole.className = 'hole';
+      hole.dataset.index = i;
+      hole.innerHTML = `
+        <div class="hole-bg"></div>
+        <div class="mole">🐭</div>
+      `;
+      hole.addEventListener('click', () => onHoleClick(hole));
+      moleGrid.appendChild(hole);
+    }
+  }
+
+  // ── Init ──
+  function init() {
+    clearInterval(timerInterval);
+    clearInterval(moleInterval);
+
+    const cfg = DIFFS[currentDiff];
+    score = 0; hits = 0; misses = 0; combo = 0; maxCombo = 0;
+    timeLeft = cfg.duration;
+    activeMoles = new Set();
+    running = false;
+
+    scoreEl.textContent = 0;
+    hitEl.textContent   = 0;
+    missEl.textContent  = 0;
+    comboEl.textContent = '0x';
+    timeEl.textContent  = cfg.duration;
+    timerBar.style.width = '100%';
+    timerBar.style.transition = 'none';
+    diffLabel.textContent = cfg.label;
+
+    wResult.classList.remove('show');
+    buildGrid();
+  }
+
+  // ── Start ──
+  function startGame() {
+    init();
+    running = true;
+    startBtn.style.display = 'none';
+    restartBtn.style.display = 'flex';
+
+    const cfg = DIFFS[currentDiff];
+
+    // Timer
+    setTimeout(() => {
+      timerBar.style.transition = `width ${cfg.duration}s linear`;
+      timerBar.style.width = '0%';
+    }, 50);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timeEl.textContent = timeLeft;
+      if (timeLeft <= 0) endGame();
+    }, 1000);
+
+    // Mole spawner
+    moleInterval = setInterval(() => spawnMole(), cfg.interval);
+    spawnMole();
+  }
+
+  // ── Spawn Mole ──
+  function spawnMole() {
+    if (!running) return;
+    const cfg = DIFFS[currentDiff];
+    const holes = moleGrid.querySelectorAll('.hole');
+
+    // Pick random inactive hole
+    const inactive = [...holes].filter(h => !h.classList.contains('active'));
+    if (inactive.length === 0) return;
+
+    const hole = inactive[Math.floor(Math.random() * inactive.length)];
+    const isBomb = Math.random() < cfg.bombChance;
+
+    hole.classList.add('active');
+    if (isBomb) {
+      hole.classList.add('bomb');
+      hole.querySelector('.mole').textContent = '💣';
+    } else {
+      hole.querySelector('.mole').textContent = '🐭';
+    }
+
+    activeMoles.add(hole);
+
+    // Auto hide
+    setTimeout(() => {
+      if (hole.classList.contains('active') && !hole.classList.contains('hit') && !hole.classList.contains('bombed')) {
+        hideMole(hole);
+        // Miss penalty only for moles (not bombs)
+        if (!isBomb && running) {
+          misses++;
+          missEl.textContent = misses;
+          combo = 0;
+          comboEl.textContent = '0x';
+        }
+      }
+    }, cfg.moleTime);
+  }
+
+  function hideMole(hole) {
+    hole.classList.remove('active', 'bomb', 'hit', 'bombed');
+    hole.querySelector('.mole').textContent = '🐭';
+    activeMoles.delete(hole);
+  }
+
+  // ── Click Hole ──
+  function onHoleClick(hole) {
+    if (!running) return;
+    if (!hole.classList.contains('active')) return;
+
+    const isBomb = hole.classList.contains('bomb');
+
+    if (isBomb) {
+      // Hit bomb
+      hole.classList.add('bombed');
+      hole.classList.remove('active');
+      const penalty = 15 + combo * 2;
+      score = Math.max(0, score - penalty);
+      scoreEl.textContent = score;
+      combo = 0;
+      comboEl.textContent = '0x';
+      showPop(hole, `-${penalty}`, 'minus');
+      setTimeout(() => hideMole(hole), 300);
+    } else {
+      // Hit mole
+      hole.classList.add('hit');
+      hole.classList.remove('active');
+      combo++;
+      maxCombo = Math.max(maxCombo, combo);
+      hits++;
+      const pts = 10 + (combo > 1 ? (combo - 1) * 5 : 0);
+      score += pts;
+      scoreEl.textContent = score;
+      hitEl.textContent   = hits;
+      comboEl.textContent = `${combo}x`;
+      showPop(hole, `+${pts}`, 'plus');
+      setTimeout(() => hideMole(hole), 300);
+    }
+  }
+
+  // ── Score Pop ──
+  function showPop(hole, text, type) {
+    const pop = document.createElement('div');
+    pop.className = `score-pop ${type}`;
+    pop.textContent = text;
+    hole.appendChild(pop);
+    setTimeout(() => pop.remove(), 700);
+  }
+
+  // ── End Game ──
+  function endGame() {
+    running = false;
+    clearInterval(timerInterval);
+    clearInterval(moleInterval);
+
+    // Hide all moles
+    moleGrid.querySelectorAll('.hole').forEach(h => hideMole(h));
+
+    // Rank
+    let emoji, rank, rankClass;
+    if (score < 50)       { emoji = '😅'; rank = 'Keep Trying';  rankClass = 'rank-beginner'; }
+    else if (score < 150) { emoji = '👍'; rank = 'Not Bad';      rankClass = 'rank-average'; }
+    else if (score < 300) { emoji = '🔥'; rank = 'Nice Reflex!'; rankClass = 'rank-fast'; }
+    else if (score < 500) { emoji = '⚡'; rank = 'Lightning!';   rankClass = 'rank-pro'; }
+    else                  { emoji = '🏆'; rank = 'Unstoppable!'; rankClass = 'rank-legend'; }
+
+    // Best
+    const key = currentDiff;
+    const prev = bestScores[key] || 0;
+    const isNew = score > prev;
+    if (isNew) {
+      bestScores[key] = score;
+      localStorage.setItem('whackBest', JSON.stringify(bestScores));
+    }
+
+    document.getElementById('wResultEmoji').textContent = emoji;
+    document.getElementById('wResultScore').innerHTML = `${score} <span>pts</span>`;
+    const rankEl = document.getElementById('wRank');
+    rankEl.textContent = rank;
+    rankEl.className = `w-rank ${rankClass}`;
+    document.getElementById('wResultDetail').innerHTML = `
+      <span>🎯 ${hits} hits</span>
+      <span>❌ ${misses} miss</span>
+      <span>⚡ ${maxCombo}x combo</span>
+    `;
+    document.getElementById('wBest').textContent = isNew
+      ? `🏆 New Best: ${score} pts!`
+      : `Best (${currentDiff}): ${prev} pts`;
+
+    wResult.classList.add('show');
+  }
+
+  // ── Difficulty Buttons ──
+  document.querySelectorAll('.w-diff-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (running) return;
+      document.querySelectorAll('.w-diff-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentDiff = btn.dataset.diff;
+      init();
+      startBtn.style.display = 'flex';
+      restartBtn.style.display = 'none';
+    });
+  });
+
+  startBtn.addEventListener('click', startGame);
+  restartBtn.addEventListener('click', startGame);
+
+  // ── Init ──
+  init();
+</script>
+</body>
+</html>

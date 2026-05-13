@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio pribadi - Fullstack Developer spesialis Laravel, Flutter, PHP, dan PostgreSQL." />
   <title>Mirhan Maulana — Fullstack Developer</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-family='Arial' font-weight='bold' font-size='42' text-anchor='middle' fill='white'>MM</text></svg>" />
+  <link rel="icon" type="image/png" href="assets/images/MirhanLog.png" />
 
   <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
@@ -36,7 +36,7 @@
 <nav class="navbar navbar-expand-lg" id="mainNav">
   <div class="container">
     <a class="navbar-brand" href="#hero">
-      <span>&lt;</span>Mirhan Maulana<span class="accent">/&gt;</span>
+      <img src="assets/images/MirhanLog.png" alt="Mirhan Maulana" class="navbar-logo" />
     </a>
 
     <div class="d-flex align-items-center gap-3 order-lg-3">
@@ -44,7 +44,7 @@
       <div class="dark-toggle" id="darkToggle" title="Toggle theme">
         <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
       </div>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" title="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
@@ -52,9 +52,13 @@
     <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
         <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="#github">GitHub</a></li>
+        <li class="nav-item"><a class="nav-link" href="#messages">Pesan</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -121,7 +125,7 @@
             <div class="code-dot red"></div>
             <div class="code-dot yellow"></div>
             <div class="code-dot green"></div>
-            <div class="code-title"><i class="fa-brands fa-laravel me-1" style="color:#f05340;"></i> DeveloperProfile.php</div>
+            <div class="code-title"><i class="fa-brands fa-laravel me-1 icon-laravel"></i> DeveloperProfile.php</div>
           </div>
           <div class="code-body">
             <div class="code-line"><span class="ln">1</span><span class="kw">class </span><span class="fn">DeveloperProfile</span><span class="punc"> {</span></div>
@@ -129,9 +133,8 @@
             <div class="code-line"><span class="ln">3</span>&nbsp;&nbsp;<span class="kw">public </span><span class="prop">$name</span><span class="punc"> = </span><span class="str">'Mirhan Maulana'</span><span class="punc">;</span></div>
             <div class="code-line"><span class="ln">4</span>&nbsp;&nbsp;<span class="kw">public </span><span class="prop">$role</span><span class="punc"> = </span><span class="str">'Fullstack Dev'</span><span class="punc">;</span></div>
             <div class="code-line"><span class="ln">5</span>&nbsp;&nbsp;<span class="kw">public </span><span class="prop">$stack</span><span class="punc"> = [</span></div>
-            <div class="code-line"><span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Laravel'</span><span class="punc">,</span> <span class="str">'Flutter'</span><span class="punc">,</span></div>
-            <div class="code-line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'PHP'</span><span class="punc">,</span> <span class="str">'PostgreSQL'</span><span class="punc">,</span></div>
-            <div class="code-line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Docker'</span><span class="punc">,</span> <span class="str">'MySQL'</span><span class="punc">,</span></div>
+            <div class="code-line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'PHP'</span><span class="punc">,</span> <span class="str">'Node.js'</span><span class="punc">,</span></div>
+            <div class="code-line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'React'</span><span class="punc">,</span> <span class="str">'vue'</span><span class="punc">,</span></div>
             <div class="code-line"><span class="ln">9</span>&nbsp;&nbsp;<span class="punc">];</span></div>
             <div class="code-line"><span class="ln">10</span></div>
             <div class="code-line"><span class="ln">11</span>&nbsp;&nbsp;<span class="kw">public function </span><span class="fn">hire</span><span class="punc">(): </span><span class="fn">Response</span></div>
@@ -160,10 +163,10 @@
               <div class="about-avatar-inner">
                 <span class="about-avatar-initials">MM</span>
                 <div class="about-avatar-orbit">
-                  <span class="orbit-dot" style="--i:0"><i class="fa-brands fa-laravel"></i></span>
-                  <span class="orbit-dot" style="--i:1"><i class="fa-brands fa-php"></i></span>
-                  <span class="orbit-dot" style="--i:2"><i class="fa-solid fa-mobile-screen-button"></i></span>
-                  <span class="orbit-dot" style="--i:3"><i class="fa-solid fa-database"></i></span>
+          <span class="orbit-dot orbit-dot-1"><i class="fa-brands fa-laravel"></i></span>
+                  <span class="orbit-dot orbit-dot-2"><i class="fa-brands fa-php"></i></span>
+                  <span class="orbit-dot orbit-dot-3"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                  <span class="orbit-dot orbit-dot-4"><i class="fa-solid fa-database"></i></span>
                 </div>
               </div>
             </div>
@@ -174,14 +177,14 @@
       </div>
       <div class="col-lg-7 about-text reveal" data-delay="150">
         <span class="section-label">// about me</span>
-        <h2 class="section-title">Passionate Developer,<br><span style="color:var(--accent-bright)">Digital Problem Solver.</span></h2>
-        <p class="mb-4" style="color:var(--text-secondary);line-height:1.8;">
-          Halo! Saya <strong style="color:var(--text-primary)">Mirhan Maulana</strong>, seorang Fullstack Developer yang berfokus pada pengembangan dan pembuatan sistem digital dari nol hingga siap digunakan. Saya memiliki pengalaman dalam membangun berbagai jenis website dan aplikasi berbasis web yang modern, fungsional, responsif, dan sesuai dengan kebutuhan bisnis maupun perusahaan.
+        <h2 class="section-title">Passionate Developer,<br><span class="text-accent">Digital Problem Solver.</span></h2>
+        <p class="mb-4 about-para">
+          Halo! Saya <strong class="text-primary-strong">Mirhan Maulana</strong>, seorang Fullstack Developer yang berfokus pada pengembangan dan pembuatan sistem digital dari nol hingga siap digunakan. Saya memiliki pengalaman dalam membangun berbagai jenis website dan aplikasi berbasis web yang modern, fungsional, responsif, dan sesuai dengan kebutuhan bisnis maupun perusahaan.
         </p>
-        <p class="mb-4" style="color:var(--text-secondary);line-height:1.8;">
+        <p class="mb-4 about-para">
           Saya menguasai berbagai teknologi dalam pengembangan aplikasi, mulai dari Laravel, Node.js, Express.js, PHP, JavaScript, hingga pengelolaan database seperti PostgreSQL dan MySQL. Saya juga terbiasa membangun frontend interaktif, REST API, dashboard admin, sistem manajemen data, website corporate, hingga aplikasi web custom dengan struktur yang rapi dan scalable.
         </p>
-        <p class="mb-4" style="color:var(--text-secondary);line-height:1.8;">
+        <p class="mb-4 about-para">
           Bagi saya, pengembangan sistem bukan hanya tentang membuat aplikasi berjalan, tetapi juga tentang menciptakan solusi digital yang efisien, mudah dikembangkan, aman, dan nyaman digunakan dalam jangka panjang.
         </p>
         <div class="mb-4">
@@ -205,6 +208,125 @@
 </section>
 
 <!-- ════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// what i do</span>
+      <h2 class="section-title">Services</h2>
+      <p class="section-subtitle mx-auto">Jasa pengembangan aplikasi web yang saya tawarkan, dari frontend hingga backend.</p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Web Development -->
+      <div class="col-md-6 col-lg-4 reveal" data-delay="0">
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#2563eb,#3b82f6)">
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-desc">Membangun website modern, responsif, dan SEO-friendly. Mulai dari landing page, company profile, hingga web app yang kompleks.</p>
+          <ul class="service-list">
+            <li>Landing Page & Company Profile</li>
+            <li>Web App Custom</li>
+            <li>Responsive & Mobile-First</li>
+            <li>SEO Optimization</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sistem Development -->
+      <div class="col-md-6 col-lg-4 reveal" data-delay="80">
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">
+            <i class="fa-solid fa-gears"></i>
+          </div>
+          <h3 class="service-title">Sistem Development</h3>
+          <p class="service-desc">Pengembangan sistem informasi dan manajemen bisnis yang scalable, aman, dan mudah digunakan sesuai kebutuhan perusahaan.</p>
+          <ul class="service-list">
+            <li>Sistem Informasi Manajemen</li>
+            <li>Sistem Inventaris & Stok</li>
+            <li>Sistem Absensi & HR</li>
+            <li>Sistem Point of Sale (POS)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- REST API Development -->
+      <div class="col-md-6 col-lg-4 reveal" data-delay="160">
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#0284c7,#38bdf8)">
+            <i class="fa-solid fa-plug"></i>
+          </div>
+          <h3 class="service-title">REST API Development</h3>
+          <p class="service-desc">Membangun REST API yang clean, terstruktur, dan terdokumentasi dengan baik untuk kebutuhan integrasi antar sistem atau mobile app.</p>
+          <ul class="service-list">
+            <li>RESTful API Design</li>
+            <li>JWT Authentication</li>
+            <li>API Documentation (Swagger)</li>
+            <li>Third-party Integration</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard -->
+      <div class="col-md-6 col-lg-4 reveal" data-delay="240">
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#059669,#34d399)">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3 class="service-title">Admin Dashboard</h3>
+          <p class="service-desc">Membangun panel admin yang intuitif dengan visualisasi data, manajemen user, role & permission, serta laporan yang lengkap.</p>
+          <ul class="service-list">
+            <li>Dashboard Analitik & Chart</li>
+            <li>Role & Permission Management</li>
+            <li>Export Excel / PDF</li>
+            <li>Notifikasi Real-time</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- UI Integration -->
+      <div class="col-md-6 col-lg-4 reveal" data-delay="320">
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#db2777,#f472b6)">
+            <i class="fa-solid fa-paintbrush"></i>
+          </div>
+          <h3 class="service-title">UI Integration</h3>
+          <p class="service-desc">Mengintegrasikan desain UI/UX dari Figma atau template ke dalam kode yang bersih, pixel-perfect, dan interaktif.</p>
+          <ul class="service-list">
+            <li>Figma to Code</li>
+            <li>Template Integration</li>
+            <li>CSS Animation & Interaction</li>
+            <li>Cross-browser Compatible</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Database Design -->
+      <div class="col-md-6 col-lg-4 reveal" data-delay="400">
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#d97706,#fbbf24)">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3 class="service-title">Database Design</h3>
+          <p class="service-desc">Merancang struktur database yang efisien, ternormalisasi, dan optimal untuk performa query tinggi pada skala besar.</p>
+          <ul class="service-list">
+            <li>ERD & Schema Design</li>
+            <li>Query Optimization</li>
+            <li>MySQL & PostgreSQL</li>
+            <li>Migration & Seeding</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
      SKILLS
 ════════════════════════════════════════ -->
 <section id="skills">
@@ -219,9 +341,7 @@
       <!-- Laravel -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="0">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-laravel" style="color:#f05340;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-laravel icon-laravel"></i></div>
           <div class="skill-name">Laravel</div>
           <div class="skill-desc">MVC, Eloquent ORM, REST API, Middleware, Queue</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="90"></div></div>
@@ -232,9 +352,7 @@
       <!-- Node.js -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="80">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-node-js" style="color:#68a063;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-node-js icon-nodejs"></i></div>
           <div class="skill-name">Node.js</div>
           <div class="skill-desc">Express, REST API, NPM, async/await</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="78"></div></div>
@@ -245,9 +363,7 @@
       <!-- PHP -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="160">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-php" style="color:#8892be;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-php icon-php"></i></div>
           <div class="skill-name">PHP</div>
           <div class="skill-desc">PHP 8.x, OOP, Composer, PSR Standards</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="92"></div></div>
@@ -258,9 +374,7 @@
       <!-- PostgreSQL -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="240">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-solid fa-database" style="color:#336791;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-solid fa-database icon-pgsql"></i></div>
           <div class="skill-name">PostgreSQL</div>
           <div class="skill-desc">Query optimization, indexing, stored procedures</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="82"></div></div>
@@ -271,9 +385,7 @@
       <!-- MySQL -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="320">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-solid fa-server" style="color:#f29111;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-solid fa-server icon-mysql"></i></div>
           <div class="skill-name">MySQL</div>
           <div class="skill-desc">Relational DB, normalization, migrations</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="88"></div></div>
@@ -284,9 +396,7 @@
       <!-- Bootstrap -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="400">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-bootstrap" style="color:#7952b3;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-bootstrap icon-bootstrap"></i></div>
           <div class="skill-name">Bootstrap</div>
           <div class="skill-desc">Responsive UI, custom themes, components</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="95"></div></div>
@@ -297,9 +407,7 @@
       <!-- Vue.js -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="480">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-vuejs" style="color:#42b883;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-vuejs icon-vue"></i></div>
           <div class="skill-name">Vue.js</div>
           <div class="skill-desc">Vue 3, Composition API, Pinia, Vite</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="80"></div></div>
@@ -310,9 +418,7 @@
       <!-- React -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="560">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-react" style="color:#61dafb;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-react icon-react"></i></div>
           <div class="skill-name">React</div>
           <div class="skill-desc">Hooks, Redux, React Router, Next.js</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="75"></div></div>
@@ -323,9 +429,7 @@
       <!-- Angular -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="640">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-angular" style="color:#dd0031;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-angular icon-angular"></i></div>
           <div class="skill-name">Angular</div>
           <div class="skill-desc">TypeScript, RxJS, Angular CLI, Services</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="70"></div></div>
@@ -336,9 +440,7 @@
       <!-- CodeIgniter -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="720">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-solid fa-fire" style="color:#ee4323;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-solid fa-fire icon-ci"></i></div>
           <div class="skill-name">CodeIgniter</div>
           <div class="skill-desc">CI 4, MVC, Query Builder, REST API</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="85"></div></div>
@@ -349,9 +451,7 @@
       <!-- Golang -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="800">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-golang" style="color:#00acd7;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-golang icon-golang"></i></div>
           <div class="skill-name">Golang</div>
           <div class="skill-desc">Gin, Goroutine, REST API, Microservices</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="70"></div></div>
@@ -362,9 +462,7 @@
       <!-- TypeScript -->
       <div class="col-6 col-md-4 col-lg-3 reveal" data-delay="880">
         <div class="skill-card">
-          <div class="skill-icon">
-            <i class="fa-brands fa-js" style="color:#3178c6;"></i>
-          </div>
+          <div class="skill-icon"><i class="fa-brands fa-js icon-ts"></i></div>
           <div class="skill-name">TypeScript</div>
           <div class="skill-desc">Types, Interfaces, Generics, Decorators</div>
           <div class="skill-bar-wrap"><div class="skill-bar" data-level="78"></div></div>
@@ -399,9 +497,8 @@
       <!-- Project 1: Corporate Website -->
       <div class="col-md-6 col-lg-4 project-item reveal" data-cat="web" data-delay="0">
         <div class="project-card h-100">
-          <div class="project-img-placeholder" style="position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e,#16213e);opacity:0.7;"></div>
-            <i class="fa-solid fa-building" style="position:relative;z-index:1;"></i>
+          <div class="project-img-placeholder project-img-corporate">
+            <i class="fa-solid fa-building project-icon"></i>
             <div class="project-overlay">
               <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
@@ -424,9 +521,8 @@
       <!-- Project 2: Admin Dashboard -->
       <div class="col-md-6 col-lg-4 project-item reveal" data-cat="web" data-delay="80">
         <div class="project-card h-100">
-          <div class="project-img-placeholder" style="position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f172a,#1e3a5f);opacity:0.7;"></div>
-            <i class="fa-solid fa-chart-line" style="position:relative;z-index:1;"></i>
+          <div class="project-img-placeholder project-img-dashboard">
+            <i class="fa-solid fa-chart-line project-icon"></i>
             <div class="project-overlay">
               <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
@@ -449,9 +545,8 @@
       <!-- Project 3: Sistem CRUD -->
       <div class="col-md-6 col-lg-4 project-item reveal" data-cat="backend" data-delay="160">
         <div class="project-card h-100">
-          <div class="project-img-placeholder" style="position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1628,#1a2744);opacity:0.7;"></div>
-            <i class="fa-solid fa-database" style="position:relative;z-index:1;"></i>
+          <div class="project-img-placeholder project-img-crud">
+            <i class="fa-solid fa-database project-icon"></i>
             <div class="project-overlay">
               <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
@@ -474,9 +569,8 @@
       <!-- Project 5: Blog Management -->
       <div class="col-md-6 col-lg-4 project-item reveal" data-cat="web" data-delay="80">
         <div class="project-card h-100">
-          <div class="project-img-placeholder" style="position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0a2e,#2d1b69);opacity:0.7;"></div>
-            <i class="fa-solid fa-pen-nib" style="position:relative;z-index:1;"></i>
+          <div class="project-img-placeholder project-img-blog">
+            <i class="fa-solid fa-pen-nib project-icon"></i>
             <div class="project-overlay">
               <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
@@ -499,9 +593,8 @@
       <!-- Project 6: Dynamic Menu -->
       <div class="col-md-6 col-lg-4 project-item reveal" data-cat="backend" data-delay="160">
         <div class="project-card h-100">
-          <div class="project-img-placeholder" style="position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a0a,#1a3a1a);opacity:0.7;"></div>
-            <i class="fa-solid fa-sitemap" style="position:relative;z-index:1;"></i>
+          <div class="project-img-placeholder project-img-menu">
+            <i class="fa-solid fa-sitemap project-icon"></i>
             <div class="project-overlay">
               <a href="#" class="overlay-btn" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               <a href="#" class="overlay-btn" title="Source Code"><i class="fa-brands fa-github"></i></a>
@@ -535,32 +628,32 @@
         <span class="section-label">// career path</span>
         <h2 class="section-title">Work<br>Experience</h2>
         <p class="section-subtitle">Perjalanan profesional yang membentuk keahlian dan pola pikir saya sebagai developer.</p>
-        <div class="mt-4 p-4" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);">
+        <div class="exp-stats-card">
           <div class="d-flex align-items-center gap-3 mb-3">
-            <div style="width:40px;height:40px;background:var(--gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;flex-shrink:0;">
+            <div class="exp-stat-icon exp-stat-icon-blue">
               <i class="fa-solid fa-trophy"></i>
             </div>
             <div>
-              <div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">3+ Years</div>
-              <div style="font-size:0.75rem;color:var(--text-muted);">Professional Experience</div>
+              <div class="exp-stat-num">3+ Years</div>
+              <div class="exp-stat-label">Professional Experience</div>
             </div>
           </div>
           <div class="d-flex align-items-center gap-3 mb-3">
-            <div style="width:40px;height:40px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#22c55e;flex-shrink:0;">
+            <div class="exp-stat-icon exp-stat-icon-green">
               <i class="fa-solid fa-circle-check"></i>
             </div>
             <div>
-              <div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">25+ Projects</div>
-              <div style="font-size:0.75rem;color:var(--text-muted);">Successfully Delivered</div>
+              <div class="exp-stat-num">25+ Projects</div>
+              <div class="exp-stat-label">Successfully Delivered</div>
             </div>
           </div>
           <div class="d-flex align-items-center gap-3">
-            <div style="width:40px;height:40px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fbbf24;flex-shrink:0;">
+            <div class="exp-stat-icon exp-stat-icon-yellow">
               <i class="fa-solid fa-star"></i>
             </div>
             <div>
-              <div style="font-weight:700;color:var(--text-primary);font-size:0.9rem;">5-Star Reviews</div>
-              <div style="font-size:0.75rem;color:var(--text-muted);">From satisfied clients</div>
+              <div class="exp-stat-num">5-Star Reviews</div>
+              <div class="exp-stat-label">From satisfied clients</div>
             </div>
           </div>
         </div>
@@ -623,7 +716,7 @@
           </div>
 
           <!-- Freelance -->
-          <div class="timeline-item" style="margin-bottom:0;">
+          <div class="timeline-item timeline-item-last">
             <div class="timeline-dot"></div>
             <div class="timeline-card">
               <div class="exp-period"><i class="fa-regular fa-calendar"></i> 2022 — Ongoing</div>
@@ -646,6 +739,35 @@
 </section>
 
 <!-- ════════════════════════════════════════
+     GITHUB ACTIVITY
+════════════════════════════════════════ -->
+<section id="github">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// coding activity</span>
+      <h2 class="section-title">GitHub Activity</h2>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Contribution Graph -->
+      <div class="col-12 reveal" data-delay="0">
+        <div class="github-card">
+          <div class="github-card-header">
+            <i class="fa-brands fa-github"></i>
+            <span>Contribution Graph — Mirhan15</span>
+          </div>
+          <div class="github-graph-wrap">
+            <img src="https://github-readme-activity-graph.vercel.app/graph?username=Mirhan15&bg_color=0f1525&color=3b82f6&line=2563eb&point=60a5fa&area=true&hide_border=true" alt="GitHub Contribution Chart" class="github-graph-img" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
      CONTACT
 ════════════════════════════════════════ -->
 <section id="contact">
@@ -658,33 +780,33 @@
 
     <div class="row g-4 mb-5">
       <div class="col-md-4 reveal" data-delay="0">
-        <a href="https://wa.me/6285224750924" target="_blank" class="contact-card" style="color:inherit;">
-          <div class="contact-icon" style="background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);color:#25d366;">
+        <a href="https://wa.me/6285224750924" target="_blank" rel="noopener noreferrer" class="contact-card">
+          <div class="contact-icon contact-icon-wa">
             <i class="fa-brands fa-whatsapp"></i>
           </div>
           <div class="contact-label">WhatsApp</div>
           <div class="contact-value">+62 852-2475-0924</div>
-          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Chat langsung, fast response!</div>
+          <div class="contact-note">Chat langsung, fast response!</div>
         </a>
       </div>
       <div class="col-md-4 reveal" data-delay="100">
-        <a href="mailto:mirhanmaulana15@gmail.com" class="contact-card" style="color:inherit;">
-          <div class="contact-icon" style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.3);color:#3b82f6;">
+        <a href="mailto:mirhanmaulana15@gmail.com" class="contact-card">
+          <div class="contact-icon contact-icon-email">
             <i class="fa-solid fa-envelope"></i>
           </div>
           <div class="contact-label">Email</div>
           <div class="contact-value">mirhanmaulana15@gmail.com</div>
-          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Respon dalam 24 jam</div>
+          <div class="contact-note">Respon dalam 24 jam</div>
         </a>
       </div>
       <div class="col-md-4 reveal" data-delay="200">
-        <a href="https://github.com/Mirhan15" target="_blank" class="contact-card" style="color:inherit;">
-          <div class="contact-icon" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text-primary);">
+        <a href="https://github.com/Mirhan15" target="_blank" rel="noopener noreferrer" class="contact-card">
+          <div class="contact-icon contact-icon-github">
             <i class="fa-brands fa-github"></i>
           </div>
           <div class="contact-label">GitHub</div>
           <div class="contact-value">@Mirhan15</div>
-          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;">Lihat semua project saya</div>
+          <div class="contact-note">Lihat semua project saya</div>
         </a>
       </div>
     </div>
@@ -693,10 +815,10 @@
     <div class="row justify-content-center reveal" data-delay="100">
       <div class="col-lg-8">
         <div class="contact-form-wrap">
-          <h3 style="font-weight:700;font-size:1.3rem;color:var(--text-primary);margin-bottom:8px;">
-            Kirim Pesan <i class="fa-solid fa-paper-plane ms-2" style="color:var(--accent-bright);"></i>
+          <h3 class="contact-form-title">
+            Kirim Pesan <i class="fa-solid fa-paper-plane ms-2 icon-accent"></i>
           </h3>
-          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:28px;">Isi form di bawah dan saya akan segera menghubungi Anda.</p>
+          <p class="contact-form-subtitle">Isi form di bawah dan saya akan segera menghubungi Anda.</p>
           <form id="contactForm" action="https://formspree.io/f/xqendgyb" method="POST" novalidate>
             <div class="row g-4">
               <div class="col-md-6 form-group">
@@ -716,7 +838,7 @@
                 <textarea name="pesan" class="form-control" rows="5" placeholder="Ceritakan project Anda..." required></textarea>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn-primary-custom w-100 justify-content-center" style="padding:16px;">
+                <button type="submit" class="btn-primary-custom btn-submit w-100 justify-content-center">
                   <i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan
                 </button>
               </div>
@@ -730,31 +852,97 @@
 </section>
 
 <!-- ════════════════════════════════════════
+     FLYING MESSAGES ZONE
+
+<!-- ════════════════════════════════════════
+     KESAN & PESAN
+════════════════════════════════════════ -->
+<section id="messages">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// guestbook</span>
+      <h2 class="section-title">Kesan &amp; Pesan</h2>
+      <p class="section-subtitle mx-auto">Tinggalkan pesan kamu! Akan terbang-terbang di halaman ini. ✨</p>
+    </div>
+
+    <div class="row g-4 align-items-start">
+
+      <!-- Wall full width -->
+      <div class="col-12 reveal" data-delay="0">
+        <div class="msg-wall-wrap">
+          <div class="msg-wall-header-bar">
+            <span class="msg-wall-title"><i class="fa-solid fa-comments me-2"></i>Pesan Terbaru</span>
+            <span class="msg-live-badge"><span class="msg-live-dot"></span>Live</span>
+          </div>
+          <!-- Flying zone di dalam card -->
+          <div id="flyZone" class="msg-fly-zone" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Form full width di bawah -->
+      <div class="col-12 reveal" data-delay="100">
+        <div class="msg-form-wrap">
+          <h3 class="msg-form-title"><i class="fa-solid fa-feather-pointed me-2 icon-accent"></i>Tulis Pesanmu</h3>
+          <p class="msg-form-sub">Pesanmu akan muncul terbang di background secara real-time!</p>
+          <form id="msgForm" novalidate onsubmit="return false;">
+            <div class="row g-3 align-items-end">
+              <div class="col-md-3">
+                <label class="form-label" for="msgName">Nama</label>
+                <input type="text" id="msgName" class="form-control" placeholder="Nama kamu..." maxlength="30" autocomplete="off" />
+              </div>
+              <div class="col-md-7">
+                <label class="form-label" for="msgText">Pesan</label>
+                <div class="position-relative">
+                  <input type="text" id="msgText" class="form-control" placeholder="Tulis kesan atau pesanmu..." maxlength="120" autocomplete="off" />
+                  <span class="msg-char-count-inline"><span id="charCount">0</span>/120</span>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <button type="button" id="msgSubmitBtn" class="btn-primary-custom w-100 justify-content-center">
+                  <i class="fa-solid fa-paper-plane"></i> Kirim
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
      FOOTER
 ════════════════════════════════════════ -->
 <footer>
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-4">
-        <div class="footer-brand"><span>&lt;</span>Mirhan Maulana<span>/&gt;</span></div>
+        <div class="footer-brand">
+            <img src="assets/images/logo.png" alt="MM Logo" class="logo-mm">
+        </div>
         <div class="footer-tagline">Fullstack Developer · Jakarta, Indonesia</div>
       </div>
       <div class="col-lg-4 text-lg-center">
         <div class="d-flex gap-3 justify-content-lg-center flex-wrap">
-          <a href="#about" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">About</a>
-          <a href="#skills" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Skills</a>
-          <a href="#portfolio" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Portfolio</a>
-          <a href="#experience" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Experience</a>
-          <a href="#contact" style="color:var(--text-muted);font-size:0.82rem;text-decoration:none;">Contact</a>
+          <a href="#about" class="footer-nav-link">About</a>
+          <a href="#services" class="footer-nav-link">Services</a>
+          <a href="#skills" class="footer-nav-link">Skills</a>
+          <a href="#portfolio" class="footer-nav-link">Portfolio</a>
+          <a href="#experience" class="footer-nav-link">Experience</a>
+          <a href="games.html" class="footer-nav-link">Games</a>
+          <a href="#github" class="footer-nav-link">GitHub</a>
+          <a href="#messages" class="footer-nav-link">Pesan</a>
+          <a href="#contact" class="footer-nav-link">Contact</a>
         </div>
       </div>
       <div class="col-lg-4 d-flex justify-content-lg-end">
         <div class="footer-social">
-          <a href="https://github.com/Mirhan15" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://linkedin.com/in/mirhan-maulana" target="_blank" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://wa.me/6285224750924" target="_blank" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://github.com/Mirhan15" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/in/mirhan-maulana" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://wa.me/6285224750924" target="_blank" rel="noopener noreferrer" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
           <a href="mailto:mirhanmaulana15@gmail.com" class="social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a href="https://instagram.com/mirhan.maulana" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://instagram.com/mirhan.maulana" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
       </div>
     </div>
@@ -769,8 +957,15 @@
 <button id="backTop" title="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmFXFpFDkego/ALe0Oa8LLBmMBz" crossorigin="anonymous"></script>
 <!-- Custom JS -->
 <script src="js/script.js"></script>
+<script type="module" src="js/messages.js"></script>
+<!-- Char counter -->
+<script>
+  const msgText = document.getElementById('msgText');
+  const charCount = document.getElementById('charCount');
+  if (msgText) msgText.addEventListener('input', () => { charCount.textContent = msgText.value.length; });
+</script>
 </body>
 </html>

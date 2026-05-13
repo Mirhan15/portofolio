@@ -1,0 +1,678 @@
+﻿<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typing Speed — Mirhan Maulana</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-family='Arial' font-weight='bold' font-size='42' text-anchor='middle' fill='white'>MM</text></svg>" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/games.css" />
+  <style>
+    body { background: var(--bg-primary); }
+
+    .typing-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 16px 60px;
+    }
+
+    .typing-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .typing-header {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .typing-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f59e0b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .time-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: #f59e0b;
+    }
+
+    .typing-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Stats */
+    .typing-stats {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .t-stat { text-align: center; min-width: 60px; }
+
+    .t-stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      display: block;
+    }
+
+    .t-stat-val.accent { color: #f59e0b; }
+
+    .t-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Timer ring */
+    .timer-ring-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-ring {
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+
+    .timer-ring svg {
+      transform: rotate(-90deg);
+      position: absolute;
+      inset: 0;
+    }
+
+    .timer-ring-bg { fill: none; stroke: var(--border); stroke-width: 4; }
+    .timer-ring-fill {
+      fill: none;
+      stroke: #f59e0b;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 176;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .timer-ring-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    /* Duration selector */
+    .dur-btns {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .dur-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: var(--font-mono);
+    }
+
+    .dur-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+    .dur-btn.active {
+      background: rgba(245,158,11,0.12);
+      border-color: #f59e0b;
+      color: #f59e0b;
+    }
+
+    /* Text display */
+    .text-display {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      line-height: 1.9;
+      letter-spacing: 0.3px;
+      min-height: 110px;
+      position: relative;
+      user-select: none;
+      word-break: break-word;
+    }
+
+    .text-display .char { position: relative; }
+    .text-display .char.correct { color: #22c55e; }
+    .text-display .char.wrong   { color: #ef4444; background: rgba(239,68,68,0.15); border-radius: 2px; }
+    .text-display .char.current {
+      color: var(--text-primary);
+      background: rgba(245,158,11,0.25);
+      border-radius: 2px;
+    }
+    .text-display .char.pending { color: var(--text-muted); }
+
+    /* Cursor blink on current char */
+    .text-display .char.current::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 2px;
+      bottom: 2px;
+      width: 2px;
+      background: #f59e0b;
+      border-radius: 1px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Input */
+    .typing-input {
+      background: var(--bg-secondary) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 12px !important;
+      color: var(--text-primary) !important;
+      padding: 14px 18px !important;
+      font-family: var(--font-mono) !important;
+      font-size: 1rem !important;
+      width: 100%;
+      transition: var(--transition) !important;
+      outline: none;
+      caret-color: #f59e0b;
+    }
+
+    .typing-input:focus {
+      border-color: #f59e0b !important;
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.15) !important;
+    }
+
+    .typing-input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Buttons */
+    .t-btns { display: flex; gap: 10px; justify-content: center; }
+
+    .t-btn {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      border: none;
+      color: white;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+    }
+
+    .t-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.4); }
+
+    .t-btn-outline {
+      background: transparent;
+      border: 1px solid rgba(245,158,11,0.4);
+      color: #f59e0b;
+    }
+
+    .t-btn-outline:hover { background: rgba(245,158,11,0.1); box-shadow: none; }
+
+    /* Result card */
+    .result-card {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 24px;
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .result-card.show { display: flex; }
+
+    .result-emoji { font-size: 2.8rem; line-height: 1; }
+
+    .result-wpm {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      color: #f59e0b;
+      line-height: 1;
+    }
+
+    .result-wpm span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .result-detail {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .result-rank {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 100px;
+    }
+
+    .rank-beginner  { background: rgba(148,163,184,0.12); border: 1px solid rgba(148,163,184,0.3); color: #94a3b8; }
+    .rank-average   { background: rgba(34,197,94,0.12);   border: 1px solid rgba(34,197,94,0.3);   color: #22c55e; }
+    .rank-fast      { background: rgba(59,130,246,0.12);  border: 1px solid rgba(59,130,246,0.3);  color: #3b82f6; }
+    .rank-pro       { background: rgba(245,158,11,0.12);  border: 1px solid rgba(245,158,11,0.3);  color: #f59e0b; }
+    .rank-legend    { background: rgba(239,68,68,0.12);   border: 1px solid rgba(239,68,68,0.3);   color: #ef4444; }
+
+    .best-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">
+      <span>&lt;</span>Mirhan Maulana<span class="accent">/&gt;</span>
+    </a>
+    <div class="d-flex align-items-center gap-3">
+      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
+        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="typing-wrap">
+
+  <a href="../games.html" class="game-back-btn mb-3">
+    <i class="fa-solid fa-arrow-left"></i> Back to Games
+  </a>
+
+  <div class="typing-panel">
+
+    <div class="typing-header">
+      <div class="typing-title">⌨️ Typing Speed Test</div>
+      <span class="time-badge" id="timeBadge">60 detik</span>
+    </div>
+
+    <div class="typing-body">
+
+      <!-- Stats row -->
+      <div class="typing-stats">
+        <div class="t-stat">
+          <span class="t-stat-val accent" id="wpmVal">0</span>
+          <span class="t-stat-lbl">WPM</span>
+        </div>
+        <div class="t-stat">
+          <span class="t-stat-val" id="accVal">100%</span>
+          <span class="t-stat-lbl">Accuracy</span>
+        </div>
+        <div class="t-stat">
+          <span class="t-stat-val" id="correctVal">0</span>
+          <span class="t-stat-lbl">Correct</span>
+        </div>
+        <div class="t-stat">
+          <span class="t-stat-val" id="wrongVal">0</span>
+          <span class="t-stat-lbl">Errors</span>
+        </div>
+        <!-- Timer ring -->
+        <div class="timer-ring-wrap">
+          <div class="timer-ring">
+            <svg viewBox="0 0 64 64" width="64" height="64">
+              <circle class="timer-ring-bg" cx="32" cy="32" r="28"/>
+              <circle class="timer-ring-fill" id="ringFill" cx="32" cy="32" r="28"/>
+            </svg>
+            <div class="timer-ring-text" id="timerText">60</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duration selector -->
+      <div class="dur-btns">
+        <button class="dur-btn" data-dur="30">30s</button>
+        <button class="dur-btn active" data-dur="60">60s</button>
+        <button class="dur-btn" data-dur="90">90s</button>
+      </div>
+
+      <!-- Text display -->
+      <div class="text-display" id="textDisplay"></div>
+
+      <!-- Input -->
+      <input
+        type="text"
+        class="typing-input"
+        id="typingInput"
+        placeholder="Klik di sini lalu mulai mengetik..."
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+
+      <!-- Result -->
+      <div class="result-card" id="resultCard">
+        <div class="result-emoji" id="resultEmoji">🏆</div>
+        <div class="result-wpm" id="resultWpm">0 <span>WPM</span></div>
+        <div class="result-rank" id="resultRank"></div>
+        <div class="result-detail" id="resultDetail"></div>
+        <div class="best-badge" id="bestBadge"></div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="t-btns">
+        <button class="t-btn" id="restartBtn">
+          <i class="fa-solid fa-rotate-right"></i> Restart
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Dark Mode ──
+  const darkToggle = document.getElementById('darkToggle');
+  const html = document.documentElement;
+  html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+  darkToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ── Word Pool ──
+  const WORDS = [
+    'the','be','to','of','and','a','in','that','have','it',
+    'for','not','on','with','he','as','you','do','at','this',
+    'but','his','by','from','they','we','say','her','she','or',
+    'an','will','my','one','all','would','there','their','what',
+    'so','up','out','if','about','who','get','which','go','me',
+    'when','make','can','like','time','no','just','him','know',
+    'take','people','into','year','your','good','some','could',
+    'them','see','other','than','then','now','look','only','come',
+    'its','over','think','also','back','after','use','two','how',
+    'our','work','first','well','way','even','new','want','because',
+    'any','these','give','day','most','us','great','between','need',
+    'large','often','hand','high','place','hold','turn','move','live',
+    'code','data','web','app','dev','build','test','run','file','open',
+    'save','load','send','read','write','class','function','return',
+  ];
+
+  function generateText(count = 60) {
+    let words = [];
+    for (let i = 0; i < count; i++) {
+      words.push(WORDS[Math.floor(Math.random() * WORDS.length)]);
+    }
+    return words.join(' ');
+  }
+
+  // ── State ──
+  let text, charIndex, correctChars, wrongChars;
+  let timeLeft, duration, timerInterval, started, finished;
+  let bestWpm = {};
+
+  const CIRCUMFERENCE = 2 * Math.PI * 28; // ~175.9
+
+  // ── DOM ──
+  const textDisplay  = document.getElementById('textDisplay');
+  const typingInput  = document.getElementById('typingInput');
+  const wpmEl        = document.getElementById('wpmVal');
+  const accEl        = document.getElementById('accVal');
+  const correctEl    = document.getElementById('correctVal');
+  const wrongEl      = document.getElementById('wrongVal');
+  const timerText    = document.getElementById('timerText');
+  const ringFill     = document.getElementById('ringFill');
+  const timeBadge    = document.getElementById('timeBadge');
+  const resultCard   = document.getElementById('resultCard');
+  const resultEmoji  = document.getElementById('resultEmoji');
+  const resultWpm    = document.getElementById('resultWpm');
+  const resultRank   = document.getElementById('resultRank');
+  const resultDetail = document.getElementById('resultDetail');
+  const bestBadge    = document.getElementById('bestBadge');
+
+  // Load best scores
+  try { bestWpm = JSON.parse(localStorage.getItem('typingBest') || '{}'); } catch(e) {}
+
+  // ── Init ──
+  function init() {
+    clearInterval(timerInterval);
+    text        = generateText(80);
+    charIndex   = 0;
+    correctChars = 0;
+    wrongChars   = 0;
+    started     = false;
+    finished    = false;
+
+    wpmEl.textContent    = 0;
+    accEl.textContent    = '100%';
+    correctEl.textContent = 0;
+    wrongEl.textContent  = 0;
+    timerText.textContent = duration;
+    timeBadge.textContent = `${duration} detik`;
+    ringFill.style.strokeDashoffset = 0;
+    ringFill.style.stroke = '#f59e0b';
+
+    resultCard.classList.remove('show');
+    typingInput.value    = '';
+    typingInput.disabled = false;
+
+    renderText();
+    typingInput.focus();
+  }
+
+  // ── Render Text ──
+  function renderText() {
+    textDisplay.innerHTML = text.split('').map((ch, i) => {
+      let cls = 'pending';
+      if (i < charIndex) {
+        cls = text[i] === typedChars[i] ? 'correct' : 'wrong';
+      } else if (i === charIndex) {
+        cls = 'current';
+      }
+      const display = ch === ' ' ? '&nbsp;' : ch;
+      return `<span class="char ${cls}">${display}</span>`;
+    }).join('');
+
+    // Scroll current char into view
+    const cur = textDisplay.querySelector('.current');
+    if (cur) cur.scrollIntoView({ block: 'nearest' });
+  }
+
+  // Track typed chars for accuracy
+  let typedChars = [];
+
+  function initTyped() {
+    typedChars = new Array(text.length).fill(null);
+  }
+
+  // ── Start Timer ──
+  function startTimer() {
+    timeLeft = duration;
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerText.textContent = timeLeft;
+
+      // Ring progress
+      const offset = CIRCUMFERENCE * (1 - timeLeft / duration);
+      ringFill.style.strokeDashoffset = offset;
+
+      // Color warning
+      if (timeLeft <= 10) ringFill.style.stroke = '#ef4444';
+      else if (timeLeft <= 20) ringFill.style.stroke = '#f97316';
+
+      // Live WPM
+      const elapsed = (duration - timeLeft) / 60;
+      if (elapsed > 0) {
+        wpmEl.textContent = Math.round(correctChars / 5 / elapsed);
+      }
+
+      if (timeLeft <= 0) endGame();
+    }, 1000);
+  }
+
+  // ── Input Handler ──
+  typingInput.addEventListener('input', e => {
+    if (finished) return;
+
+    const val = typingInput.value;
+
+    // Start timer on first keystroke
+    if (!started && val.length > 0) {
+      started = true;
+      initTyped();
+      startTimer();
+    }
+
+    // Process each character typed
+    const len = Math.min(val.length, text.length);
+    for (let i = 0; i < len; i++) {
+      typedChars[i] = val[i];
+    }
+    charIndex = val.length;
+
+    // Count correct/wrong
+    correctChars = 0;
+    wrongChars   = 0;
+    for (let i = 0; i < val.length; i++) {
+      if (val[i] === text[i]) correctChars++;
+      else wrongChars++;
+    }
+
+    correctEl.textContent = correctChars;
+    wrongEl.textContent   = wrongChars;
+
+    const total = correctChars + wrongChars;
+    accEl.textContent = total > 0 ? Math.round((correctChars / total) * 100) + '%' : '100%';
+
+    renderText();
+
+    // Auto finish if all text typed
+    if (val.length >= text.length) endGame();
+  });
+
+  // Prevent paste
+  typingInput.addEventListener('paste', e => e.preventDefault());
+
+  // ── End Game ──
+  function endGame() {
+    if (finished) return;
+    finished = true;
+    clearInterval(timerInterval);
+    typingInput.disabled = true;
+
+    const elapsed = (duration - timeLeft) / 60 || duration / 60;
+    const wpm     = Math.round(correctChars / 5 / elapsed);
+    const total   = correctChars + wrongChars;
+    const acc     = total > 0 ? Math.round((correctChars / total) * 100) : 100;
+
+    wpmEl.textContent = wpm;
+
+    // Rank
+    let rank, emoji, rankClass;
+    if (wpm < 20)       { rank = 'Beginner';  emoji = '🐢'; rankClass = 'rank-beginner'; }
+    else if (wpm < 40)  { rank = 'Average';   emoji = '🚶'; rankClass = 'rank-average'; }
+    else if (wpm < 60)  { rank = 'Fast';      emoji = '🏃'; rankClass = 'rank-fast'; }
+    else if (wpm < 80)  { rank = 'Pro';       emoji = '⚡'; rankClass = 'rank-pro'; }
+    else                { rank = 'Legend';    emoji = '🔥'; rankClass = 'rank-legend'; }
+
+    // Best score
+    const key = `d${duration}`;
+    const prev = bestWpm[key] || 0;
+    const isNew = wpm > prev;
+    if (isNew) {
+      bestWpm[key] = wpm;
+      localStorage.setItem('typingBest', JSON.stringify(bestWpm));
+    }
+
+    resultEmoji.textContent = emoji;
+    resultWpm.innerHTML = `${wpm} <span>WPM</span>`;
+    resultRank.textContent  = rank;
+    resultRank.className    = `result-rank ${rankClass}`;
+    resultDetail.innerHTML  = `
+      <span>✅ ${correctChars} correct</span>
+      <span>❌ ${wrongChars} errors</span>
+      <span>🎯 ${acc}% accuracy</span>
+      <span>⏱ ${duration}s</span>
+    `;
+    bestBadge.textContent = isNew
+      ? `🏆 New Best: ${wpm} WPM!`
+      : `Best (${duration}s): ${prev} WPM`;
+
+    resultCard.classList.add('show');
+  }
+
+  // ── Duration Buttons ──
+  duration = 60;
+  document.querySelectorAll('.dur-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      duration = parseInt(btn.dataset.dur);
+      init();
+    });
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', init);
+
+  // ── Init ──
+  init();
+</script>
+</body>
+</html>

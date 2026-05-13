@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games — Mirhan Maulana</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-family='Arial' font-weight='bold' font-size='42' text-anchor='middle' fill='white'>MM</text></svg>" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/games.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/images/MirhanLog.png" alt="Mirhan Maulana" class="navbar-logo" />
+    </a>
+    <div class="d-flex align-items-center gap-3 order-lg-3">
+      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
+        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
+      </div>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" aria-controls="navbarNav" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link active" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#github">GitHub</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#messages">Pesan</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO GAMES -->
+<section id="games-hero">
+  <div class="games-hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+  </div>
+  <div class="container text-center position-relative" style="z-index:1">
+    <span class="section-label">// mini games</span>
+    <h1 class="games-hero-title">Play & Have Fun <span>🎮</span></h1>
+    <p class="games-hero-sub">Pilih game yang mau dimainkan. Semuanya dibuat dari scratch pakai vanilla JS.</p>
+  </div>
+</section>
+
+<!-- GAME CARDS -->
+<section id="games-list">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+
+      <!-- Snake -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/snake.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#22c55e,#16a34a);">
+            <span>🐍</span>
+          </div>
+          <div class="gsc-badge">Classic</div>
+          <h3 class="gsc-title">Snake Game</h3>
+          <p class="gsc-desc">Makan apel, hindari dinding & ekor sendiri. Seberapa panjang kamu bisa?</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Arrow Keys</span>
+            <span><i class="fa-solid fa-star"></i> High Score</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Memory Card -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/memory.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#a78bfa,#7c3aed);">
+            <span>🧠</span>
+          </div>
+          <div class="gsc-badge">Brain</div>
+          <h3 class="gsc-title">Memory Card</h3>
+          <p class="gsc-desc">Temukan semua pasangan kartu. Latih daya ingat dan konsentrasimu!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-computer-mouse"></i> Click</span>
+            <span><i class="fa-solid fa-clock"></i> Timer</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Typing Speed -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/typing.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#f59e0b,#d97706);">
+            <span>⌨️</span>
+          </div>
+          <div class="gsc-badge">Speed</div>
+          <h3 class="gsc-title">Typing Speed</h3>
+          <p class="gsc-desc">Tes kecepatan mengetikmu dalam 60 detik. Berapa WPM kamu?</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Keyboard</span>
+            <span><i class="fa-solid fa-bolt"></i> WPM</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Whack-a-Mole -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/whack.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#f87171,#dc2626);">
+            <span>🎯</span>
+          </div>
+          <div class="gsc-badge">Action</div>
+          <h3 class="gsc-title">Whack-a-Mole</h3>
+          <p class="gsc-desc">Pukul tikus yang muncul secepat mungkin sebelum waktu habis!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-computer-mouse"></i> Click</span>
+            <span><i class="fa-solid fa-fire"></i> Reflex</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Zombie Shooter -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/zombie.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#4ade80,#15803d);">
+            <span>🧟</span>
+          </div>
+          <div class="gsc-badge">Shooter</div>
+          <h3 class="gsc-title">Zombie Shooter</h3>
+          <p class="gsc-desc">Top-down shooter, tembak zombie dari segala arah. Survive selama mungkin!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> WASD</span>
+            <span><i class="fa-solid fa-computer-mouse"></i> Aim & Shoot</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Car Dodge -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/car.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#38bdf8,#0284c7);">
+            <span>🚗</span>
+          </div>
+          <div class="gsc-badge">Racing</div>
+          <h3 class="gsc-title">Car Dodge</h3>
+          <p class="gsc-desc">Hindari mobil lain di jalan raya. Makin lama makin cepat!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Arrow / WASD</span>
+            <span><i class="fa-solid fa-gauge-high"></i> Speed Up</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Platformer Jump -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/platformer.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#fb923c,#ea580c);">
+            <span>🦖</span>
+          </div>
+          <div class="gsc-badge">Endless</div>
+          <h3 class="gsc-title">Platformer Jump</h3>
+          <p class="gsc-desc">Lari & lompat hindari obstacle. Mirip Chrome Dino tapi lebih seru!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Space / Up</span>
+            <span><i class="fa-solid fa-infinity"></i> Endless</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Space Invader -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/space.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#818cf8,#4f46e5);">
+            <span>🔫</span>
+          </div>
+          <div class="gsc-badge">Classic</div>
+          <h3 class="gsc-title">Space Invader</h3>
+          <p class="gsc-desc">Tembak alien sebelum mereka mencapai bumi. Jangan sampai kena!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Arrow Keys</span>
+            <span><i class="fa-solid fa-space-shuttle"></i> Space Shoot</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Brick Breaker -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/brick.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#f472b6,#db2777);">
+            <span>🧱</span>
+          </div>
+          <div class="gsc-badge">Classic</div>
+          <h3 class="gsc-title">Brick Breaker</h3>
+          <p class="gsc-desc">Pantulkan bola, hancurkan semua bata. Jangan sampai bola jatuh!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-computer-mouse"></i> Mouse / Arrow</span>
+            <span><i class="fa-solid fa-layer-group"></i> Levels</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Tetris -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/tetris.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#34d399,#059669);">
+            <span>🟦</span>
+          </div>
+          <div class="gsc-badge">Puzzle</div>
+          <h3 class="gsc-title">Tetris</h3>
+          <p class="gsc-desc">Susun balok jatuh, buat baris penuh untuk menghapusnya. Klasik!</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Arrow Keys</span>
+            <span><i class="fa-solid fa-rotate"></i> Rotate</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- Ping Pong -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/pingpong.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#e879f9,#a21caf);">
+            <span>🏓</span>
+          </div>
+          <div class="gsc-badge">VS AI</div>
+          <h3 class="gsc-title">Ping Pong</h3>
+          <p class="gsc-desc">Lawan AI dalam permainan ping pong klasik. Siapa duluan 7 poin?</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> W / S</span>
+            <span><i class="fa-solid fa-robot"></i> VS AI</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+      <!-- 2048 -->
+      <div class="col-sm-6 col-lg-3">
+        <a href="games/2048.html" class="game-select-card">
+          <div class="gsc-icon" style="background: linear-gradient(135deg,#fb923c,#f59e0b);">
+            <span>🔢</span>
+          </div>
+          <div class="gsc-badge">Puzzle</div>
+          <h3 class="gsc-title">2048</h3>
+          <p class="gsc-desc">Geser tile, gabungkan angka yang sama. Bisa sampai 2048?</p>
+          <div class="gsc-meta">
+            <span><i class="fa-solid fa-keyboard"></i> Arrow Keys</span>
+            <span><i class="fa-solid fa-brain"></i> Strategy</span>
+          </div>
+          <div class="gsc-play">Play Now <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand">
+          <img src="assets/images/logo.png" alt="MM Logo" class="logo-mm">
+        </div>
+        <div class="footer-tagline">Fullstack Developer · Jakarta, Indonesia</div>
+      </div>
+      <div class="col-lg-4 text-lg-center">
+        <div class="d-flex gap-3 justify-content-lg-center flex-wrap">
+          <a href="index.html#about" class="footer-nav-link">About</a>
+          <a href="index.html#services" class="footer-nav-link">Services</a>
+          <a href="index.html#skills" class="footer-nav-link">Skills</a>
+          <a href="index.html#portfolio" class="footer-nav-link">Portfolio</a>
+          <a href="index.html#experience" class="footer-nav-link">Experience</a>
+          <a href="games.html" class="footer-nav-link">Games</a>
+          <a href="index.html#github" class="footer-nav-link">GitHub</a>
+          <a href="index.html#messages" class="footer-nav-link">Pesan</a>
+          <a href="index.html#contact" class="footer-nav-link">Contact</a>
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex justify-content-lg-end">
+        <div class="footer-social">
+          <a href="https://github.com/Mirhan15" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/in/mirhan-maulana" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://wa.me/6285224750924" target="_blank" rel="noopener noreferrer" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="mailto:mirhanmaulana15@gmail.com" class="social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://instagram.com/mirhan.maulana" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <span class="footer-copy">© 2026 Mirhan Maulana. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Dark mode toggle
+  const toggle = document.getElementById('darkToggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', saved);
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>
+</body>
+</html>

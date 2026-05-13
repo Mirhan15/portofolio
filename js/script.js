@@ -6,13 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Loader ── */
   const loader = document.getElementById('loader');
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      document.body.style.overflow = '';
-    }, 1900);
-  });
-  document.body.style.overflow = 'hidden';
+  if (loader) {
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 1900);
+    });
+  }
 
   /* ── Dark / Light Mode ── */
   const html = document.documentElement;
@@ -61,28 +63,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Typed Effect ── */
   const typeEl = document.getElementById('typedText');
-  const phrases = ['Fullstack Developer', 'Laravel Expert', 'Flutter Developer', 'PHP Enthusiast', 'Open Source Lover'];
-  let phraseIndex = 0, charIndex = 0, deleting = false;
-
-  function typeLoop() {
-    const phrase = phrases[phraseIndex];
-    if (!deleting) {
-      typeEl.textContent = phrase.slice(0, ++charIndex);
-      if (charIndex === phrase.length) {
-        deleting = true;
-        setTimeout(typeLoop, 2000);
-        return;
+  if (typeEl) {
+    const phrases = ['Fullstack Developer', 'Laravel Expert', 'Flutter Developer', 'PHP Enthusiast', 'Open Source Lover'];
+    let phraseIndex = 0, charIndex = 0, deleting = false;
+    function typeLoop() {
+      const phrase = phrases[phraseIndex];
+      if (!deleting) {
+        typeEl.textContent = phrase.slice(0, ++charIndex);
+        if (charIndex === phrase.length) { deleting = true; setTimeout(typeLoop, 2000); return; }
+      } else {
+        typeEl.textContent = phrase.slice(0, --charIndex);
+        if (charIndex === 0) { deleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; }
       }
-    } else {
-      typeEl.textContent = phrase.slice(0, --charIndex);
-      if (charIndex === 0) {
-        deleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-      }
+      setTimeout(typeLoop, deleting ? 60 : 100);
     }
-    setTimeout(typeLoop, deleting ? 60 : 100);
+    typeLoop();
   }
-  typeLoop();
 
   /* ── Reveal on Scroll ── */
   const revealEls = document.querySelectorAll('.reveal');
@@ -174,14 +170,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Back to Top ── */
   const backTop = document.getElementById('backTop');
-
-  function toggleBackTop() {
-    backTop.classList.toggle('show', window.scrollY > 400);
+  if (backTop) {
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
-  backTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  function toggleBackTop() {
+    if (backTop) backTop.classList.toggle('show', window.scrollY > 400);
+  }
 
   /* ── Snake Game ── */
   const canvas = document.getElementById('snakeCanvas');

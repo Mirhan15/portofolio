@@ -2,8 +2,9 @@
    MESSAGES.JS — Firebase Realtime + Flying Messages
    ============================================ */
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, push, onChildAdded, query, limitToLast } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+(async () => {
+const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+const { getDatabase, ref, push, onChildAdded, query, limitToLast } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js');
 
 const firebaseConfig = {
   apiKey: "AIzaSyAQX93WF4g7yo_MYrJpDfVyy-SNuIS_o2s",
@@ -202,3 +203,4 @@ if (msgSubmitBtn) {
     }
   });
 }
+})();

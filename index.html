@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" as="image" href="assets/images/hero-photo.jpg" />
   <meta name="description" content="Portfolio pribadi - Fullstack Developer spesialis Laravel, Flutter, PHP, dan PostgreSQL." />
   <title>Mirhan Maulana — Fullstack Developer</title>
   <link rel="icon" type="image/png" href="assets/images/MirhanLog.png" />
@@ -14,11 +15,21 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/agent.css" />
+  <link rel="stylesheet" href="css/certificates.css" />
 </head>
 <body>
+
+<!-- Fixed photo background -->
+<div class="site-bg" aria-hidden="true">
+  <div class="site-bg-sky"></div>
+  <div class="site-bg-photo"></div>
+  <div class="site-bg-cloud cloud-1"></div>
+  <div class="site-bg-cloud cloud-2"></div>
+</div>
 
 <!-- ════════════════════════════════════════
      LOADER
@@ -40,10 +51,6 @@
     </a>
 
     <div class="d-flex align-items-center gap-3 order-lg-3">
-      <!-- Dark Mode Toggle -->
-      <div class="dark-toggle" id="darkToggle" title="Toggle theme">
-        <div class="dark-toggle-thumb"><i class="fa-solid fa-moon"></i></div>
-      </div>
       <button class="navbar-toggler" type="button" aria-label="Toggle navigation" title="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,7 +63,7 @@
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
         <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-        <li class="nav-item"><a class="nav-link" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="#certificates">Sertifikat</a></li>
         <li class="nav-item"><a class="nav-link" href="#github">GitHub</a></li>
         <li class="nav-item"><a class="nav-link" href="#messages">Pesan</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -739,6 +746,31 @@
 </section>
 
 <!-- ════════════════════════════════════════
+     CERTIFICATES
+════════════════════════════════════════ -->
+<section id="certificates">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-label">// certificates</span>
+      <h2 class="section-title">Sertifikat &amp; Penghargaan</h2>
+      <p class="section-subtitle mx-auto"><span id="certCount">21</span> sertifikat kompetensi, pelatihan, seminar, dan kegiatan organisasi. Klik untuk melihat lebih besar.</p>
+    </div>
+
+    <div class="cert-filters">
+      <button class="filter-btn cert-filter active" data-cat="all">Semua</button>
+      <button class="filter-btn cert-filter" data-cat="kompetensi">Kompetensi</button>
+      <button class="filter-btn cert-filter" data-cat="pelatihan">Pelatihan &amp; Seminar</button>
+      <button class="filter-btn cert-filter" data-cat="organisasi">Organisasi &amp; Kegiatan</button>
+    </div>
+
+    <div class="cert-grid" id="certGrid"></div>
+    <div class="cert-more-wrap">
+      <button type="button" id="certMore" class="btn-outline-custom" hidden></button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
      GITHUB ACTIVITY
 ════════════════════════════════════════ -->
 <section id="github">
@@ -758,7 +790,7 @@
             <span>Contribution Graph — Mirhan15</span>
           </div>
           <div class="github-graph-wrap">
-            <img src="https://github-readme-activity-graph.vercel.app/graph?username=Mirhan15&bg_color=0f1525&color=3b82f6&line=2563eb&point=60a5fa&area=true&hide_border=true" alt="GitHub Contribution Chart" class="github-graph-img" />
+            <img src="https://ghchart.rshah.org/3b82f6/Mirhan15" alt="GitHub Contribution Chart" class="github-graph-img" />
           </div>
         </div>
       </div>
@@ -930,7 +962,7 @@
           <a href="#skills" class="footer-nav-link">Skills</a>
           <a href="#portfolio" class="footer-nav-link">Portfolio</a>
           <a href="#experience" class="footer-nav-link">Experience</a>
-          <a href="games.html" class="footer-nav-link">Games</a>
+          <a href="#certificates" class="footer-nav-link">Sertifikat</a>
           <a href="#github" class="footer-nav-link">GitHub</a>
           <a href="#messages" class="footer-nav-link">Pesan</a>
           <a href="#contact" class="footer-nav-link">Contact</a>
@@ -957,10 +989,12 @@
 <button id="backTop" title="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmFXFpFDkego/ALe0Oa8LLBmMBz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-- Custom JS -->
 <script src="js/script.js"></script>
-<script type="module" src="js/messages.js"></script>
+<script src="js/messages.js"></script>
+<script src="js/agent.js"></script>
+<script src="js/certificates.js"></script>
 <script>
   // Hamburger toggle
   document.querySelector('.navbar-toggler').addEventListener('click', function() {

@@ -16,28 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Dark / Light Mode ── */
-  const html = document.documentElement;
-  const darkToggle = document.getElementById('darkToggle');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  html.setAttribute('data-theme', savedTheme);
-  updateToggleIcon(savedTheme);
-
-  darkToggle.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    updateToggleIcon(next);
-  });
-
-  function updateToggleIcon(theme) {
-    const thumb = darkToggle.querySelector('.dark-toggle-thumb');
-    thumb.innerHTML = theme === 'dark'
-      ? '<i class="fa-solid fa-moon"></i>'
-      : '<i class="fa-solid fa-sun"></i>';
-  }
-
   /* ── Navbar Scroll ── */
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
